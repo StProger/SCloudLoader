@@ -8,6 +8,7 @@ MODELS_MODULES_PREFIX: str = "bot.database.models"
 
 MODELS_MODULES: list[str] = [
     f"{MODELS_MODULES_PREFIX}.user",
+    f"{MODELS_MODULES_PREFIX}.sub",
 ]
 
 TORTOISE_CONFIG = {

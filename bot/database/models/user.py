@@ -19,6 +19,11 @@ class User(Model):
     # Дата регистрации
     created_at = fields.DatetimeField(auto_now_add=True, null=True)
 
+    # подписан на все каналы или нет
+    subbed = fields.BooleanField(default=False)
+    # был ли уже подписан (чтоб стату не засчитывать)
+    subbed_before = fields.BooleanField(default=False)
+
     # Данные пользователя
     first_name = fields.TextField(null=True)
     last_name = fields.TextField(null=True)
@@ -27,6 +32,9 @@ class User(Model):
 
     # Дата окончания подписки
     subscription_to = fields.DatetimeField(null=True, default=datetime.now)
+
+    # Бесплатные попытки (по дефолту 0)
+    free_attempts = fields.SmallIntField(max_value=2, default=0)
 
     class Meta:
         table = "users"
