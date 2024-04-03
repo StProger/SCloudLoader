@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     DB_HOST: str = os.getenv("DB_HOST").strip()
     DB_PORT: int = int(os.getenv("DB_PORT").strip())
     DB_USER: str = os.getenv("DB_USER").strip()
+    BOT_TOKEN: str = os.getenv("BOT_TOKEN").strip()
 
     @property
     def db_url(self):
@@ -35,6 +36,19 @@ class Settings(BaseSettings):
             password=self.DB_PASSWORD,
             path=f"/{self.DB_NAME}",
         )
+
+    @property
+    def fsm_redis_url(self) -> str:
+        """
+        создание URL для подключения к редису
+
+        :return: redis connection url
+        """
+        return str(URL.build(
+            scheme="redis",
+            host=self.FSM_REDIS_HOST,
+            path="/" + str(self.FSM_REDIS_DB)
+        ))
 
 
 settings = Settings()

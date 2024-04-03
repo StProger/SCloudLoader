@@ -6,6 +6,7 @@ from bot.filters.free_attempt import FreeAttempts
 from bot.database.models.sub import Sub
 from bot.database.models.user import User
 from bot.keyboards.inline.user import not_subbed_markup
+from bot.service.redis_serv.user import get_msg_to_delete, set_msg_to_delete
 
 
 router = Router()
@@ -21,9 +22,12 @@ async def free_attempts(
         state: FSMContext
 ):
 
-    await message.answer(
-        text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
-    )
+    await set_msg_to_delete(message.from_user.id,
+                            (await message.answer(
+                                text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
+                            )
+                             ).message_id
+                            )
 
     await state.set_state("free_attempts:link")
 
@@ -35,6 +39,19 @@ async def download_music(
         state: FSMContext,
         user: User
 ):
+
+    try:
+        await message.bot.delete_message(
+            message.from_user.id,
+            (await get_msg_to_delete(
+                user_id=message.from_user.id
+            ))
+        )
+    except:
+        pass
+
+    await set_msg_to_delete(message.from_user.id,
+                            message.message_id)
 
     if bool(sponsors):
 
@@ -68,10 +85,19 @@ async def subbed(callback: types.CallbackQuery,
 
         await callback.answer("Вы не подписались❌")
     else:
+        try:
+            await callback.bot.delete_message(
+                callback.from_user.id,
+                (await get_msg_to_delete(callback.from_user.id))
+            )
+        except:
+            pass
 
         await callback.message.delete()
-        await callback.message.answer(
-            text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
-        )
+
+        await set_msg_to_delete(callback.from_user.id,
+                                (await callback.message.answer(
+                                    text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
+                                )).message_id)
 
         await state.set_state("free_attempts:link")
