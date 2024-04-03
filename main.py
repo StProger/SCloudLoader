@@ -8,6 +8,7 @@ from bot.database.config import db, TORTOISE_CONFIG
 from bot.settings import settings
 from bot.middlewares import register_all_middlewares
 from bot.routers import register_all_routers
+from bot import logging
 
 import asyncio
 
@@ -22,6 +23,8 @@ async def main():
 
     register_all_middlewares(dp)
     register_all_routers(dp)
+
+    await logging.setup()
 
     try:
 

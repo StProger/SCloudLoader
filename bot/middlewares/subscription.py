@@ -40,7 +40,6 @@ class SubMiddleware(BaseMiddleware):
         #     return await handler(event, data)
 
         user: Optional[User] = data.get('user')
-        state: FSMContext = data['state']
 
         chat: Optional[Chat] = data.get('event_chat')
 

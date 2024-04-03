@@ -7,6 +7,11 @@ from bot.database.models.sub import Sub
 from bot.database.models.user import User
 from bot.keyboards.inline.user import not_subbed_markup
 from bot.service.redis_serv.user import get_msg_to_delete, set_msg_to_delete
+from bot.service import SoundCloud
+
+import os
+
+import tortoise.expressions
 
 
 router = Router()
@@ -16,23 +21,7 @@ NOT_SUBBED = """
 """
 
 
-@router.message(FreeAttempts())
-async def free_attempts(
-        message: types.Message,
-        state: FSMContext
-):
-
-    await set_msg_to_delete(message.from_user.id,
-                            (await message.answer(
-                                text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
-                            )
-                             ).message_id
-                            )
-
-    await state.set_state("free_attempts:link")
-
-
-@router.message(StateFilter("free_attempts:link"))
+@router.message(StateFilter("free_attempts:link"), F.text.contains("https"))
 async def download_music(
         message: types.Message,
         sponsors: list[Sub],
@@ -71,8 +60,77 @@ async def download_music(
 
     else:
 
+        downloaded_msg = await message.answer(
+            text="Поиск трека...⏳"
+        )
+
         # Тут логика скачивания музыки и отправка
-        ...
+        downloaded_track = await SoundCloud.download_track(
+            track_url=message.text,
+            user_id=message.from_user.id,
+            state=state
+        )
+
+        if downloaded_track is None:
+
+            try:
+                await message.bot.delete_message(
+                    chat_id=message.chat.id,
+                    message_id=downloaded_msg.message_id
+                )
+            except:
+                pass
+        else:
+
+            state_data = await state.get_data()
+
+            # Получаем данные о треке
+            artist = state_data['artist']
+            track_name = state_data['track_name']
+            title = artist + " - " + track_name
+
+            try:
+                await message.bot.delete_message(
+                    chat_id=message.chat.id,
+                    message_id=downloaded_msg.message_id,
+                    request_timeout=1
+                )
+                await message.delete()
+            except:
+                pass
+
+            path_file = f"./bot/service/sound_cloud/tracks/{message.from_user.id}.wav"
+
+            # Добавляем бесплатную попытку
+            user.free_attempts = tortoise.expressions.F("free_attempts") + 1
+            await user.save()
+
+            # Отправляем трек
+            await message.bot.send_audio(
+                chat_id=message.chat.id,
+                audio=types.FSInputFile(path_file),
+                title=title,
+                request_timeout=60
+            )
+
+            os.remove(path_file)
+    await state.clear()
+
+
+@router.message(FreeAttempts())
+async def free_attempts(
+        message: types.Message,
+        state: FSMContext
+):
+
+    await set_msg_to_delete(message.from_user.id,
+                            (await message.answer(
+                                text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
+                            )
+                             ).message_id
+                            )
+
+    await state.set_state("free_attempts:link")
 
 
 @router.callback_query(F.data == "checksub")

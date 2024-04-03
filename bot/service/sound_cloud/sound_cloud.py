@@ -2,11 +2,9 @@ from aiogram.fsm.context import FSMContext
 
 from sclib.asyncio import SoundcloudAPI, Track
 
-import aiofiles
+from pydub import AudioSegment
 
-# from pydub import AudioSegment
-
-import asyncio
+import asyncio, os
 
 
 class SoundCloud(object):
@@ -27,27 +25,29 @@ class SoundCloud(object):
 
         # assert type(track) is Track
 
-        filename = f'tracks/{user_id}.mp3'
+        filename = f'bot/service/sound_cloud/tracks/{user_id}.mp3'
 
-        # await state.update_data(
-        #     artist=track.artist,
-        #     track_name=track.title
-        # )
+        await state.update_data(
+            artist=track.artist,
+            track_name=track.title
+        )
 
-        async with aiofiles.open(filename, 'wb+') as file:
+        with open(filename, 'wb+') as file:
             await track.write_mp3_to(file)
 
-        #
-
+        await cls.convert_mp3_to_wav(
+            user_id=user_id
+        )
+        os.remove(filename)
         return True
 
-    # @classmethod
-    # async def convert_mp3_to_wav(cls,
-    #                              user_id: int):
-    #     """ Конверт в wav """
-    #
-    #     sound = AudioSegment.from_mp3(f"{user_id}.mp3")
-    #     sound.export(f"{user_id}.wav", format="wav")
+    @classmethod
+    async def convert_mp3_to_wav(cls,
+                                 user_id: int):
+        """ Конверт в wav """
+
+        sound = AudioSegment.from_mp3(f"bot/service/sound_cloud/tracks/{user_id}.mp3")
+        sound.export(f"bot/service/sound_cloud/tracks/{user_id}.wav", format="wav")
 
 
 async def main():

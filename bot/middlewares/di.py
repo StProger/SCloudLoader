@@ -3,6 +3,7 @@ import typing
 from typing import Callable, Dict, Awaitable, Any
 
 from aiogram import BaseMiddleware
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 
 from bot.database.models.user import User
