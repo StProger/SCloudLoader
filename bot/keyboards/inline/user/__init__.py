@@ -14,3 +14,27 @@ def not_subbed_markup(sponsors: list[Sub]):
             ]
         ]
     )
+
+
+def main_inline():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Скачать музыку🎧", callback_data="download_track"
+                ),
+                InlineKeyboardButton(
+                    text="Подписка💸", callback_data="sub"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Реферальная система", callback_data="ref_system"
+                ),
+                InlineKeyboardButton(
+                    text="Тех. поддержка", url="https://t.me/babodoy"
+                )
+            ]
+        ]
+    )

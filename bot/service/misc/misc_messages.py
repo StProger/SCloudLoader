@@ -1,15 +1,12 @@
 from aiogram import Bot
 from aiogram.types import Message
 
+from bot.keyboards.inline.user import main_inline
 
-async def input_link_free_attempt(message: Message):
-    """ Пробный период """
 
-    try:
-        await message.delete()
-    except:
-        pass
+async def main_menu(message: Message):
 
     await message.answer(
-        text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
+        text="Главное меню",
+        reply_markup=main_inline()
     )
