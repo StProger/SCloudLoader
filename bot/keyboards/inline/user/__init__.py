@@ -38,3 +38,24 @@ def main_inline():
             ]
         ]
     )
+
+
+def sub_inline():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Crypto (CryptoCloud)", callback_data="crypto_pay_sub"
+                ),
+                InlineKeyboardButton(
+                    text="Карта (Lava)", callback_data="card_pay_sub"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Меню", callback_data="menu"
+                )
+            ]
+        ]
+    )

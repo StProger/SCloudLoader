@@ -44,3 +44,6 @@ class User(Model):
 
         return datetime.now(tz=pytz.timezone(settings.BOT_TIMEZONE)) < self.subscription_to
 
+    async def expire_sub(self):
+
+        return (self.subscription_to - datetime.now(tz=pytz.timezone(settings.BOT_TIMEZONE))).days
