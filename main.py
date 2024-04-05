@@ -32,7 +32,7 @@ async def main():
         await dp.start_polling(bot)
 
     except KeyboardInterrupt:
-        sys.exit()
+        sys.exit(1)
     finally:
         await bot.session.close()
 

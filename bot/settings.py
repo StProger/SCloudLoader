@@ -32,6 +32,15 @@ class Settings(BaseSettings):
 
     ADMIN_IDS: list[int] = []
 
+    # Домен API CryptoCloud
+    CRYPTO_CLOUD_API_URL: str = "https://api.cryptocloud.plus/v2"
+
+    # shop_id CryptoCloud
+    SHOP_ID: str = os.getenv("SHOP_ID").strip()
+
+    # Токен CryptoCloud
+    CRYPTO_CLOUD_API_TOKEN = os.getenv("CRYPTO_CLOUD_API_TOKEN").strip()
+
 
     @property
     def db_url(self):
