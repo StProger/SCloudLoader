@@ -1,7 +1,7 @@
 from bot.service.redis_serv.base import redis_pool
 
 
-async def set_msg_to_delete(user_id: int, message_id: int):
+async def set_msg_to_delete(user_id: int, message_id: int) -> object:
     """ Установка сообщения на удаление (пользователю) """
     await redis_pool.set(f"{user_id}:msg:id", message_id)
 

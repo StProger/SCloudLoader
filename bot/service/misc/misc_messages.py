@@ -3,7 +3,9 @@ from aiogram.types import Message, CallbackQuery
 
 from bot.keyboards.inline.user import main_inline
 from bot.keyboards.inline.user import download_track_inline
+from bot.keyboards.inline.user import choose_crypto_inline
 from bot.service.redis_serv.user import set_msg_to_delete
+from bot.settings import settings
 
 
 async def main_menu(message: Message):
@@ -31,5 +33,19 @@ async def download_track(
         (await callback.message.edit_text(
         text="Отправь мне ссылку трека 🔗 на SoundCloud 👇",
         reply_markup=download_track_inline()
-    )).message_id
+            )).message_id
+    )
+
+
+async def crypto_menu(callback: CallbackQuery):
+
+    PRICES = settings.PRICES
+
+    text = f"""1 месяц - <b>{PRICES['crypto'][1]['price']}₽</b>
+3 месяца - <b>{PRICES['crypto'][3]['price']}₽</b> ({PRICES['crypto'][3]['month']} за месяц)
+6 месяцев - <b>{PRICES['crypto'][6]['price']}₽</b> ({PRICES['crypto'][6]['month']} за месяц)"""
+
+    await callback.message.edit_text(
+        text=text,
+        reply_markup=choose_crypto_inline()
     )
