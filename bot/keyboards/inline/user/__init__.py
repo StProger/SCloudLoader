@@ -80,13 +80,40 @@ def choose_crypto_inline():
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="1 месяц", callback_data="month_1"
+                    text="1 месяц", callback_data="month_crypto_1"
                 ),
                 InlineKeyboardButton(
-                    text="3 месяца", callback_data="month_3"
+                    text="3 месяца", callback_data="month_crypto_3"
                 ),
                 InlineKeyboardButton(
-                    text="6 месяцев", callback_data="month_6"
+                    text="6 месяцев", callback_data="month_crypto_6"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Назад", callback_data="sub"
+                ),
+                InlineKeyboardButton(
+                    text="Меню", callback_data="menu"
+                )
+            ]
+        ]
+    )
+
+
+def choose_card_inline():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="1 месяц", callback_data="month_card_1"
+                ),
+                InlineKeyboardButton(
+                    text="3 месяца", callback_data="month_card_3"
+                ),
+                InlineKeyboardButton(
+                    text="6 месяцев", callback_data="month_card_6"
                 )
             ],
             [
