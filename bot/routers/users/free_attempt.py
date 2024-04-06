@@ -61,7 +61,7 @@ async def download_music(
     else:
 
         downloaded_msg = await message.answer(
-            text="Поиск трека...⏳"
+            text="Скачивание трека...⏳"
         )
 
         # Тут логика скачивания музыки и отправка

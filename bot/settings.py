@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 from dotenv import load_dotenv
 
-import os, json
+import os
 
 from yarl import URL
 
@@ -39,8 +39,39 @@ class Settings(BaseSettings):
     SHOP_ID: str = os.getenv("SHOP_ID").strip()
 
     # Токен CryptoCloud
-    CRYPTO_CLOUD_API_TOKEN = os.getenv("CRYPTO_CLOUD_API_TOKEN").strip()
+    CRYPTO_CLOUD_API_TOKEN: str = os.getenv("CRYPTO_CLOUD_API_TOKEN").strip()
 
+    # Цены подписки
+    PRICES: dict = {
+        "crypto": {
+            1: {
+                "price": 999,
+                "month": None
+            },
+            3: {
+                "price": 2399,
+                "month": 799
+            },
+            6: {
+                "price": 4199,
+                "month": 699
+            }
+        },
+        "card": {
+            1: {
+                "price": 1099,
+                "month": None
+            },
+            3: {
+                "price": 2499,
+                "month": None
+            },
+            6: {
+                "price": 4299,
+                "month": None
+            }
+        }
+    }
 
     @property
     def db_url(self):

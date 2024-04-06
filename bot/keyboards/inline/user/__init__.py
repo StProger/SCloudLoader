@@ -59,3 +59,16 @@ def sub_inline():
             ]
         ]
     )
+
+
+def download_track_inline():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Меню", callback_data="menu"
+                )
+            ]
+        ]
+    )
