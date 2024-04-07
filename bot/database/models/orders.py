@@ -1,6 +1,11 @@
-from tortoise.models import Model
+import pytz
 
+from tortoise.models import Model
 from tortoise import fields
+
+from datetime import datetime
+
+from bot.settings import settings
 
 
 class Order(Model):
@@ -13,6 +18,15 @@ class Order(Model):
 
     user_id = fields.BigIntField(null=False)
 
+    created_at = fields.DatetimeField(null=False, default=datetime.now(tz=pytz.timezone(settings.BOT_TIMEZONE)))
+
+    status_paid = fields.BooleanField(default=False)
+
     class Meta:
 
         table = "orders"
+
+    async def left_time(self):
+        """ Получить кол-во минут после создания заказа """
+
+        return (datetime.now(tz=pytz.timezone(settings.BOT_TIMEZONE)) - self.created_at).total_seconds() / 60.0
