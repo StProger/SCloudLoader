@@ -36,6 +36,8 @@ class User(Model):
     # Бесплатные попытки (по дефолту 0)
     free_attempts = fields.SmallIntField(max_value=2, default=0)
 
+    id_referral = fields.BigIntField(null=True)
+
     class Meta:
         table = "users"
 

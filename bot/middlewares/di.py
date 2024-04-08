@@ -1,5 +1,6 @@
 import html
 import typing
+from datetime import timedelta
 from typing import Callable, Dict, Awaitable, Any
 
 from aiogram import BaseMiddleware
@@ -38,13 +39,25 @@ class ExistsUserMiddleware(BaseMiddleware):
 
             if get_user is None:
 
+                id_referral = None
+                if isinstance(event, Message):
+
+                    if len(event.text.split()) > 1:
+
+                        id_referral = int(event.text.split()[-1])
+
+                        referer_data = await User.get_or_none(user_id=id_referral)
+                        referer_data.subscription_to = (referer_data.subscription_to + timedelta(days=7))
+                        await referer_data.save()
+
                 get_user: User = await User.create(
                     user_id=user_id,
                     username=username.lower(),
                     first_name=html.escape(first_name),
                     last_name=html.escape(last_name),
                     full_name=html.escape(full_name),
-                    language_code=language_code
+                    language_code=language_code,
+                    id_referral=id_referral
                 )
 
             else:
