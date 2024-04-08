@@ -1,5 +1,7 @@
 from tortoise.models import Model
 from tortoise import fields
+from tortoise.functions import Count
+from tortoise.expressions import Q
 
 from datetime import datetime
 
@@ -49,3 +51,7 @@ class User(Model):
     async def expire_sub(self):
 
         return (self.subscription_to - datetime.now(tz=pytz.timezone(settings.BOT_TIMEZONE))).days
+
+    async def get_count_ref(self):
+
+        return await User.filter(Q(id_referral=self.user_id)).count()

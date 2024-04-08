@@ -4,6 +4,7 @@ from bot.routers.users import download_track
 from bot.routers.users import sub
 from bot.routers.users import buy_sub_crypto
 from bot.routers.users import buy_sub_card
+from bot.routers.users import ref_system
 
 from bot.filters.free_attempt import FreeAttempts
 
@@ -21,3 +22,4 @@ def register_all_routers(dp: Dispatcher):
     dp.include_router(sub.router)
     dp.include_router(buy_sub_crypto.router)
     dp.include_router(buy_sub_card.router)
+    dp.include_router(ref_system.router)

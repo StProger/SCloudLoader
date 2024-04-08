@@ -124,3 +124,44 @@ async def create_invoice_crypto_pay(
                                      "У вас есть <b>10 минут</b> для оплаты.",
                                 reply_markup=link_pay_inline
                                 )).message_id)
+
+
+async def referal_system(
+        callback: CallbackQuery,
+        user: User
+):
+    user_id = callback.from_user.id
+
+    # Получаем username бота для реферальной ссылки
+    bot_info = await callback.bot.get_me()
+    username_bot = bot_info.username
+
+    ref_link = f"https://t.me/{username_bot}?start={user_id}"
+
+    count_referals = await user.get_count_ref()
+
+    msg_text = f"""
+Хочешь подписку, не тратя денег?
+
+Всё что тебе нужно сделать это скинуть своим друзьям эту ссылку — <code>{ref_link}</code>
+
+Если твой друг перейдёт по ссылке, то ты получишь 7 дней бесплатной подписки!
+
+Приглашать друзей — самый лучший способ, которым ты можешь помочь нам, а также легко получить подписку!
+
+Спасибо за твою поддержку 💛
+
+Количество приглашенных рефералов: {count_referals}"""
+
+    await callback.message.edit_text(
+        text=msg_text,
+        reply_markup=InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(
+                        text="Меню", callback_data="menu"
+                    )
+                ]
+            ]
+        )
+    )
