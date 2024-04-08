@@ -1,6 +1,6 @@
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-from bot.keyboards.inline.user import main_inline
+from bot.keyboards.inline.user import main_inline, main_inline_admin
 from bot.keyboards.inline.user import download_track_inline
 from bot.keyboards.inline.user import choose_crypto_inline
 from bot.keyboards.inline.user import choose_card_inline
@@ -26,11 +26,27 @@ async def main_menu(message: Message):
     )
 
 
+async def main_menu_admin(message: Message):
+
+    await message.answer(
+        text="Главное меню",
+        reply_markup=main_inline_admin()
+    )
+
+
+
 async def callback_main_menu(callback: CallbackQuery):
 
     await callback.message.edit_text(
         text="Главное меню",
         reply_markup=main_inline()
+    )
+
+async def callback_main_admin_menu(callback: CallbackQuery):
+
+    await callback.message.edit_text(
+        text="Главное меню",
+        reply_markup=main_inline_admin()
     )
 
 

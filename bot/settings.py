@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 from dotenv import load_dotenv
 
-import os
+import os, json
 
 from yarl import URL
 
@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     # Путь к логам
     PATH_LOGS: str = "bot/data/logs.log"
 
-    ADMIN_IDS: list[int] = []
+    ADMIN_IDS: list[int] = json.loads(os.getenv("ADMIN_IDS"))
 
     # Домен API CryptoCloud
     CRYPTO_CLOUD_API_URL: str = "https://api.cryptocloud.plus/v2"

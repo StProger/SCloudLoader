@@ -40,6 +40,35 @@ def main_inline():
     )
 
 
+def main_inline_admin():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Админ-панель🔐", callback_data="admin_panel"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Скачать музыку🎧", callback_data="download_track"
+                ),
+                InlineKeyboardButton(
+                    text="Подписка💸", callback_data="sub"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Реферальная система", callback_data="ref_system"
+                ),
+                InlineKeyboardButton(
+                    text="Тех. поддержка", url="https://t.me/babodoy"
+                )
+            ]
+        ]
+    )
+
+
 def sub_inline():
 
     return InlineKeyboardMarkup(
