@@ -36,7 +36,16 @@ class Settings(BaseSettings):
     CRYPTO_CLOUD_API_URL: str = "https://api.cryptocloud.plus/v2"
 
     # shop_id CryptoCloud
-    SHOP_ID: str = os.getenv("SHOP_ID").strip()
+    SHOP_ID_CRYPTO_CLOUD: str = os.getenv("SHOP_ID_CRYPTO_CLOUD").strip()
+
+    # shop_id LAVA
+    SHOP_ID_LAVA: str = os.getenv("SHOP_ID_LAVA").strip()
+
+    # secretKey LAVA
+    SECRET_KEY_LAVA: str = os.getenv("SECRET_KEY_LAVA").strip()
+
+    # Домен API LAVA
+    LAVA_API_URL: str = os.getenv("LAVA_API_URL").strip()
 
     # Токен CryptoCloud
     CRYPTO_CLOUD_API_TOKEN: str = os.getenv("CRYPTO_CLOUD_API_TOKEN").strip()

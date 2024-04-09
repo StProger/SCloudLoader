@@ -23,7 +23,7 @@ class CryptoCloud(object):
         body = {
             "amount": amount,
             "currency": "RUB",
-            "shop_id": settings.SHOP_ID,
+            "shop_id": settings.SHOP_ID_CRYPTO_CLOUD,
             "order_id": order_id,
             "add_fields": {
                 "time_to_pay": {
