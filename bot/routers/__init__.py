@@ -5,6 +5,9 @@ from bot.routers.users import sub
 from bot.routers.users import buy_sub_crypto
 from bot.routers.users import buy_sub_card
 from bot.routers.users import ref_system
+from bot.routers.admin import expire_sub
+from bot.routers.admin import switch_sub
+from bot.routers.admin import admin_panel
 
 from bot.filters.free_attempt import FreeAttempts
 
@@ -23,3 +26,6 @@ def register_all_routers(dp: Dispatcher):
     dp.include_router(buy_sub_crypto.router)
     dp.include_router(buy_sub_card.router)
     dp.include_router(ref_system.router)
+    dp.include_router(expire_sub.router)
+    dp.include_router(switch_sub.router)
+    dp.include_router(admin_panel.router)

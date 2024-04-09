@@ -6,7 +6,7 @@ from aiogram.client.session.base import BaseSession
 from bot.database.models.user import User
 from bot.database.models.orders import Order
 
-from bot.service.payments.crypto_cloud import CryptoCloud
+from bot.service.payments.crypto_cloud.crypto_cloud import CryptoCloud
 from bot.service.redis_serv.user import get_pay_msg_delete
 
 from aiogram import Bot, types
@@ -14,7 +14,7 @@ from aiogram import Bot, types
 from datetime import timedelta
 
 
-async def expecting_paid(
+async def expecting_paid_crypto(
         bot: Bot,
         user_id: int,
         user: User,

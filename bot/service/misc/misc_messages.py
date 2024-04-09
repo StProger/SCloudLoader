@@ -6,9 +6,11 @@ from bot.keyboards.inline.user import choose_crypto_inline
 from bot.keyboards.inline.user import choose_card_inline
 
 from bot.service.redis_serv.user import set_msg_to_delete
-from bot.service.payments.expecting_paid import expecting_paid
-from bot.service.payments.crypto_cloud import CryptoCloud
+from bot.service.payments.crypto_cloud.expecting_paid import expecting_paid_crypto
+from bot.service.payments.crypto_cloud.crypto_cloud import CryptoCloud
 from bot.service.redis_serv.user import set_pay_msg_delete
+from bot.service.payments.lava.lava import LavaPayment
+from bot.service.payments.lava.expecting_pay import expecting_paid_lava
 
 from bot.settings import settings
 
@@ -123,8 +125,8 @@ async def create_invoice_crypto_pay(
     uuid_merchant = new_invoice["uuid"]
 
     # Создаём таску на ожидание оплаты
-    await asyncio.create_task(
-        expecting_paid(
+    asyncio.create_task(
+        expecting_paid_crypto(
             bot_session=callback.bot.session,
             user_id=callback.from_user.id,
             user=user,
@@ -140,6 +142,58 @@ async def create_invoice_crypto_pay(
                                      "У вас есть <b>10 минут</b> для оплаты.",
                                 reply_markup=link_pay_inline
                                 )).message_id)
+
+
+async def create_invoice_card_pay(
+        callback: CallbackQuery,
+        user: User
+):
+
+    PRICES = settings.PRICES
+    count_month = int(callback.data.split("_")[-1])
+    order: Order = await Order.create(
+        count_month=count_month,
+        user_id=callback.from_user.id
+    )
+
+    # Создаём новый инвойс на оплату
+    new_invoice = await LavaPayment.create_invoice(
+        amount=float(PRICES["crypto"][count_month]['price']),
+        order=order,
+        bot_session=callback.bot.session
+    )
+
+    link_pay_inline = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Оплатить", url=new_invoice["link"]
+                )
+            ]
+        ]
+    )
+
+    invoice_id = new_invoice["uuid"]
+
+    # Создаём таску на ожидание оплаты
+    asyncio.create_task(
+        expecting_paid_lava(
+            bot_session=callback.bot.session,
+            user_id=callback.from_user.id,
+            user=user,
+            invoice_id=invoice_id,
+            order=order,
+            bot=callback.bot
+        )
+    )
+
+    await set_pay_msg_delete(callback.from_user.id,
+                             (await callback.message.edit_text(
+                                 text="Для оплаты нажмите кнопку ниже👇.\n"
+                                      "У вас есть <b>10 минут</b> для оплаты.",
+                                 reply_markup=link_pay_inline
+                             )).message_id)
+
 
 
 async def referal_system(
@@ -176,6 +230,33 @@ async def referal_system(
                 [
                     InlineKeyboardButton(
                         text="Меню", callback_data="menu"
+                    )
+                ]
+            ]
+        )
+    )
+
+
+async def admin_panel_main(callback: CallbackQuery):
+
+    await callback.message.edit_text(
+        text="Админ-панель",
+        reply_markup=InlineKeyboardMarkup(
+            inline_keyboard=[
+                [
+                    InlineKeyboardButton(
+                        text="Включить подписку✅",
+                        callback_data="switch_on_sub"
+                    ),
+                    InlineKeyboardButton(
+                        text="Выключить подписку❌",
+                        callback_data="switch_off_sub"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text="Меню",
+                        callback_data="menu"
                     )
                 ]
             ]
