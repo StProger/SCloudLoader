@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  redis:
+    container_name: "SCloud_redis"
+    image: redis:alpine
+    volumes:
+      - redis-data:/data
+    command:
+      - redis-server
+    restart: on-failure
+    ports:
+      - "6379:6379"
+  db:
+    container_name: "SCloud_postgres"
+    image: postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:var/lib/postgresql/data
+    restart: always
+
+  bot:
+    container_name: "SCloud_app"
+    build: .
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - ./.env
+    command: sh -c "python3 main.py"
+
+volumes:
+  redis-data:
+    driver: local
+  pgdata:
+    driver: local
