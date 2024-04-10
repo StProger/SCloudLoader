@@ -1,5 +1,7 @@
 FROM python:3.12
 WORKDIR /SCloudDownloader
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 COPY . .
 RUN pip3 install --upgrade --no-cache-dir setuptools
 COPY requirements.txt requirements.txt
