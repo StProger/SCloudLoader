@@ -17,11 +17,10 @@ services:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:var/lib/postgresql/data
+      - .postgres:/var/lib/postgresql/data
     restart: always
 
   bot:
@@ -37,5 +36,5 @@ services:
 volumes:
   redis-data:
     driver: local
-  pgdata:
+  .postgres:
     driver: local
