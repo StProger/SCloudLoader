@@ -32,7 +32,7 @@ services:
       - redis
     env_file:
       - ./.env
-    command: sh -c "python3 main.py"
+    command: sh -c "aerich migrate aerich upgrade python3 main.py"
 
 volumes:
   redis-data:
