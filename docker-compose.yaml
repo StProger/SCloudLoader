@@ -32,7 +32,7 @@ services:
       - redis
     env_file:
       - ./.env
-    command: until echo 'SELECT 1' | nc -w 1 postgres 5432 > /dev/null 2>&1; do sleep 1; done && aerich migrate && aerich upgrade && exec postgres && python3 main.py"
+    command: bash -c "until echo 'SELECT 1' | nc -w 1 postgres 5432 > /dev/null 2>&1; do sleep 1; done && aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database && aerich migrate && aerich upgrade && exec postgres  && python3 main.py"
 
 volumes:
   redis-data:
