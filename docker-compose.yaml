@@ -32,7 +32,7 @@ services:
       - redis
     env_file:
       - ./.env
-    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database && aerich migrate && aerich upgrade && wait-for-it db:5432 -- python3 main.py"
+    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database && wait-for-it db:5432 && aerich migrate && aerich upgrade && python3 main.py"
 
 volumes:
   redis-data:
