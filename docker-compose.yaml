@@ -15,7 +15,7 @@ services:
     container_name: "SCloud_postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
-    command: bash -c "until echo 'SELECT 1' | nc -w 1 postgres 5432 > /dev/null 2>&1; do sleep 1; done && aerich migrate && aerich upgrade && exec postgres"
+    # command: bash -c "until echo 'SELECT 1' | nc -w 1 postgres 5432 > /dev/null 2>&1; do sleep 1; done && aerich migrate && aerich upgrade && exec postgres"
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -32,7 +32,7 @@ services:
       - redis
     env_file:
       - ./.env
-    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database && python3 main.py"
+    command: until echo 'SELECT 1' | nc -w 1 postgres 5432 > /dev/null 2>&1; do sleep 1; done && aerich migrate && aerich upgrade && exec postgres && python3 main.py"
 
 volumes:
   redis-data:
