@@ -8,7 +8,7 @@ router = Router()
 
 
 @router.callback_query(
-    F.data == "sub"
+    F.data == "sub_user"
 )
 async def sub_callback(
         callback: types.CallbackQuery,

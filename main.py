@@ -5,10 +5,12 @@ from aiogram.fsm.storage.redis import RedisStorage
 from aiogram import Dispatcher, Bot
 
 from bot.database.config import db, TORTOISE_CONFIG
-from bot.settings import settings
+from bot.database.models.user import User
+from bot.settings import settings, BOT_SCHEDULER
 from bot.middlewares import register_all_middlewares
 from bot.routers import register_all_routers
 from bot import logging
+from bot.service.misc.notification_sub import notification_sub
 
 import asyncio
 
@@ -25,6 +27,9 @@ async def main():
     register_all_routers(dp)
 
     await logging.setup()
+
+    BOT_SCHEDULER.add_job(notification_sub, trigger="interval", hours=24, args=(bot,))
+    BOT_SCHEDULER.start()
 
     try:
 

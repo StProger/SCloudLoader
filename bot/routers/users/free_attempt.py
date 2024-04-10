@@ -143,6 +143,14 @@ async def subbed(callback: types.CallbackQuery,
 
         await callback.answer("Вы не подписались❌")
     else:
+        user.subbed = True
+
+        if not user.subbed_before:
+            user.subbed_before = True
+
+            await Sub.filter(is_active=True).update(visits=tortoise.expressions.F("visits") + 1)
+
+        await user.save()
         try:
             await callback.bot.delete_message(
                 callback.from_user.id,

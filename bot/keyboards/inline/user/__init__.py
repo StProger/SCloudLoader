@@ -25,7 +25,7 @@ def main_inline():
                     text="Скачать музыку🎧", callback_data="download_track"
                 ),
                 InlineKeyboardButton(
-                    text="Подписка💸", callback_data="sub"
+                    text="Подписка💸", callback_data="sub_user"
                 )
             ],
             [
@@ -54,7 +54,7 @@ def main_inline_admin():
                     text="Скачать музыку🎧", callback_data="download_track"
                 ),
                 InlineKeyboardButton(
-                    text="Подписка💸", callback_data="sub"
+                    text="Подписка💸", callback_data="sub_user"
                 )
             ],
             [

@@ -240,7 +240,11 @@ async def referal_system(
 async def admin_panel_main(callback: CallbackQuery):
 
     await callback.message.edit_text(
-        text="Админ-панель",
+        text="""
+<b>Админ меню</b>
+
+<code>🔹Команды:</code>
+        """,
         reply_markup=InlineKeyboardMarkup(
             inline_keyboard=[
                 [
@@ -251,6 +255,12 @@ async def admin_panel_main(callback: CallbackQuery):
                     InlineKeyboardButton(
                         text="Выключить подписку❌",
                         callback_data="switch_off_sub"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text="🔐 Обяз. Подписка",
+                        callback_data="sub"
                     )
                 ],
                 [
