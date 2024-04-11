@@ -10,13 +10,12 @@ services:
     restart: on-failure
     ports:
       - "6379:6379"
-  db:
+  postgres:
     image: postgres:14.2-alpine
     container_name: "scloud_postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=scloud
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
