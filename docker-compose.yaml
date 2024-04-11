@@ -15,8 +15,10 @@ services:
     container_name: "scloud_postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=scloud
     ports:
       - "5433:5432"
     restart: always
@@ -25,8 +27,10 @@ services:
     container_name: "scloud_app"
     build: .
     depends_on:
-      - postgres
-      - redis
+      postgres:
+        condition: "service_started"
+      redis:
+        condition: "service_started"
     env_file:
       - ./.env
 

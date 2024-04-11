@@ -11,4 +11,4 @@ class FreeAttempts(Filter):
 
     async def __call__(self, _, user: User) -> bool:
 
-        return bool(user.free_attempts < 2) and user.user_id not in settings.ADMIN_IDS
+        return bool(user.free_attempts < 2 and user.user_id not in settings.ADMIN_IDS)
