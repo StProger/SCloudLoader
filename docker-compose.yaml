@@ -11,13 +11,12 @@ services:
     ports:
       - "6379:6379"
   postgres:
-    image: postgres:14.2-alpine
+    image: postgres:latest
     container_name: "scloud_postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - .env
     ports:
       - "5433:5432"
     restart: always
