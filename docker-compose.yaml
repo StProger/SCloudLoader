@@ -9,7 +9,7 @@ services:
       - redis-server
     restart: on-failure
     ports:
-      - "6380:6379"
+      - "6379:6379"
   db:
     image: postgres:latest
     container_name: "SCloud_postgres"
@@ -20,7 +20,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     restart: always
 
   bot:
@@ -31,7 +31,7 @@ services:
       - redis
     env_file:
       - ./.env
-    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database && aerich migrate && aerich upgrade && python3 main.py"
+    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database/migrations && aerich init-db && aerich migrate && aerich upgrade && python3 main.py"
 
 volumes:
   redis-data:
