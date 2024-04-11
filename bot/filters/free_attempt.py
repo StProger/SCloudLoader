@@ -1,6 +1,7 @@
 from aiogram.filters import Filter
 
 from bot.database.models.user import User
+from bot.settings import settings
 
 
 class FreeAttempts(Filter):
@@ -10,4 +11,4 @@ class FreeAttempts(Filter):
 
     async def __call__(self, _, user: User) -> bool:
 
-        return bool(user.free_attempts < 2)
+        return bool(user.free_attempts < 2) and user.user_id not in settings.ADMIN_IDS

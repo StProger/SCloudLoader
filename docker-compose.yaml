@@ -27,9 +27,6 @@ services:
     depends_on:
       - postgres
       - redis
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
     env_file:
       - ./.env
 
