@@ -27,8 +27,12 @@ services:
     depends_on:
       - postgres
       - redis
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
     env_file:
       - ./.env
+
     command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database/migrations && python3 main.py"
 
 volumes:
