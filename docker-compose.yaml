@@ -25,7 +25,7 @@ services:
     container_name: "scloud_app"
     build: .
     depends_on:
-      - db
+      - postgres
       - redis
     env_file:
       - ./.env
