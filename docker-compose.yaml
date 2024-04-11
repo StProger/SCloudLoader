@@ -12,7 +12,7 @@ services:
       - "6379:6379"
   db:
     image: postgres:latest
-    container_name: "SCloud_postgres"
+    container_name: "scloud_postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
@@ -24,14 +24,14 @@ services:
     restart: always
 
   bot:
-    container_name: "SCloud_app"
+    container_name: "scloud_app"
     build: .
     depends_on:
       - db
       - redis
     env_file:
       - ./.env
-    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database/migrations && aerich init-db && aerich migrate && aerich upgrade && python3 main.py"
+    command: sh -c "aerich init -t bot.database.config.TORTOISE_CONFIG --location ./bot/database/migrations && python3 main.py"
 
 volumes:
   redis-data:
