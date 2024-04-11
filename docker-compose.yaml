@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   redis:
-    container_name: "SCloud_redis"
+    container_name: "scloud_redis"
     image: redis:alpine
     volumes:
       - redis-data:/data
@@ -11,7 +11,7 @@ services:
     ports:
       - "6379:6379"
   db:
-    image: postgres:latest
+    image: postgres:14.2-alpine
     container_name: "scloud_postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
