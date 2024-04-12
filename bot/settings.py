@@ -56,7 +56,7 @@ class Settings(BaseSettings):
     PRICES: dict = {
         "crypto": {
             1: {
-                "price": 999,
+                "price": 50,
                 "month": None
             },
             3: {

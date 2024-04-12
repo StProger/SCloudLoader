@@ -31,7 +31,7 @@ async def expecting_paid_crypto(
                     text="Меню", callback_data="menu"
                 ),
                 types.InlineKeyboardButton(
-                    text="Подписка💸", callback_data="sub"
+                    text="Подписка💸", callback_data="sub_user"
                 )
             ]
         ]
@@ -43,7 +43,7 @@ async def expecting_paid_crypto(
             uuid_merchant=uuid,
             bot_session=bot_session
         )
-
+        print(merchant_info)
         if merchant_info["status_merchant"] == "created":
 
             if (await order.left_time()) >= 10:

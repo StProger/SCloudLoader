@@ -15,7 +15,7 @@ async def expire_sub_user(
         command: CommandObject
 ):
     print(command.args)
-    user: User = await User.get_or_none(username=command.args)
+    user: User = await User.get_or_none(username=command.args.replace("@", "").replace("https://t.me/", ""))
 
     await message.delete()
 

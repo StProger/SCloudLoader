@@ -21,7 +21,7 @@ NOT_SUBBED = """
 """
 
 
-@router.message(StateFilter("free_attempts:link"), F.text.contains("https"))
+@router.message(FreeAttempts(), F.text.contains("https://soundcloud"))
 async def download_music(
         message: types.Message,
         sponsors: list[Sub],
@@ -70,7 +70,7 @@ async def download_music(
             user_id=message.from_user.id,
             state=state
         )
-
+        print(f"Трек: {downloaded_track}")
         if downloaded_track is None:
 
             try:
@@ -80,6 +80,9 @@ async def download_music(
                 )
             except:
                 pass
+            await message.answer(
+                text="Произошла ошибка. Попробуйте позже снова."
+            )
         else:
 
             state_data = await state.get_data()
@@ -130,7 +133,7 @@ async def free_attempts(
                              ).message_id
                             )
 
-    await state.set_state("free_attempts:link")
+    # await state.set_state("free_attempts:link")
 
 
 @router.callback_query(F.data == "checksub")

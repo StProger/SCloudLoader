@@ -31,7 +31,7 @@ async def expecting_paid_lava(
                     text="Меню", callback_data="menu"
                 ),
                 types.InlineKeyboardButton(
-                    text="Подписка💸", callback_data="sub"
+                    text="Подписка💸", callback_data="sub_user"
                 )
             ]
         ]
