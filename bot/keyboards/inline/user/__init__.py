@@ -120,7 +120,7 @@ def choose_crypto_inline():
             ],
             [
                 InlineKeyboardButton(
-                    text="Назад", callback_data="sub"
+                    text="Назад", callback_data="sub_user"
                 ),
                 InlineKeyboardButton(
                     text="Меню", callback_data="menu"
@@ -147,7 +147,7 @@ def choose_card_inline():
             ],
             [
                 InlineKeyboardButton(
-                    text="Назад", callback_data="sub"
+                    text="Назад", callback_data="sub_user"
                 ),
                 InlineKeyboardButton(
                     text="Меню", callback_data="menu"
