@@ -105,7 +105,7 @@ async def get_username_user(
     await state.set_state("switch_off_sub:username")
     await set_msg_to_delete(callback.from_user.id,
                             (await callback.message.edit_text(
-                                text="Отправьте @username юзера",
+                                text="Отправьте username юзера",
                                 reply_markup=cancel_inline
                             )).message_id)
 
