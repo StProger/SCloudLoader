@@ -130,11 +130,20 @@ async def free_attempts(
                             (await message.answer(
                                 text="""
 Отправь мне ссылку трека 🔗 на SoundCloud 👇
-
-Ссылка должна быть такого вида:
-https://soundcloud.com/itsmeneedle/sunday-morning"""
+""",
+                                reply_markup=types.InlineKeyboardMarkup(
+                                    inline_keyboard=[
+                                        [
+                                            types.InlineKeyboardButton(
+                                                text="Как получить ссылку",
+                                                url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                                            )
+                                        ]
+                                    ]
+                                )
                             )
-                             ).message_id
+                             ,
+                             ).message_id,
                             )
 
     # await state.set_state("free_attempts:link")
@@ -172,9 +181,17 @@ async def subbed(callback: types.CallbackQuery,
                                 (await callback.message.answer(
                                     text="""
 Отправь мне ссылку трека 🔗 на SoundCloud 👇
-
-Ссылка должна быть такого вида:
-https://soundcloud.com/itsmeneedle/sunday-morning"""
+""",
+                                    reply_markup=types.InlineKeyboardMarkup(
+                                        inline_keyboard=[
+                                            [
+                                                types.InlineKeyboardButton(
+                                                    text="Как получить ссылку",
+                                                    url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                                                )
+                                            ]
+                                        ]
+                                    )
                                 )).message_id)
 
         await state.set_state("free_attempts:link")

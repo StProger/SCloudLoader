@@ -61,9 +61,7 @@ async def download_track(
         (await callback.message.edit_text(
         text="""
 Отправь мне ссылку трека 🔗 на SoundCloud 👇
-
-Ссылка должна быть такого вида:
-https://soundcloud.com/itsmeneedle/sunday-morning""",
+""",
         reply_markup=download_track_inline()
             )).message_id
     )

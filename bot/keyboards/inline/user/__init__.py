@@ -98,6 +98,11 @@ def download_track_inline():
                 InlineKeyboardButton(
                     text="Меню", callback_data="menu"
                 )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Как получить ссылку", url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                )
             ]
         ]
     )
