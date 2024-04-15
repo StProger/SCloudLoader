@@ -60,9 +60,9 @@ async def admin_mail_confirm(callback: types.CallbackQuery, state: FSMContext):
 
     data = await state.get_data()
 
-    await asyncio.create_task(start_mailing(
+    asyncio.create_task(start_mailing(
         data["message_id"], data["reply_markup"],
         callback.message.chat.id, callback.message.bot
     ))
-
     await state.clear()
+    await callback.answer()
