@@ -128,7 +128,11 @@ async def free_attempts(
 
     await set_msg_to_delete(message.from_user.id,
                             (await message.answer(
-                                text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
+                                text="""
+Отправь мне ссылку трека 🔗 на SoundCloud 👇
+
+Ссылка должна быть такого вида:
+https://soundcloud.com/itsmeneedle/sunday-morning"""
                             )
                              ).message_id
                             )
@@ -166,7 +170,11 @@ async def subbed(callback: types.CallbackQuery,
 
         await set_msg_to_delete(callback.from_user.id,
                                 (await callback.message.answer(
-                                    text="Отправь мне ссылку трека 🔗 на SoundCloud 👇"
+                                    text="""
+Отправь мне ссылку трека 🔗 на SoundCloud 👇
+
+Ссылка должна быть такого вида:
+https://soundcloud.com/itsmeneedle/sunday-morning"""
                                 )).message_id)
 
         await state.set_state("free_attempts:link")
