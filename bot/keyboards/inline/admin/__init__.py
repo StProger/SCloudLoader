@@ -24,11 +24,30 @@ def admin_menu_markup():
                 ],
                 [
                     InlineKeyboardButton(
+                        text="📨 Рассылка",
+                        callback_data="admin_mailing"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
                         text="Меню",
                         callback_data="menu"
                     )
                 ]
             ]
+    )
+
+
+def admin_mailing_confirm():
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(text="Да✅", callback_data=f"mailing_confirm"),
+            ],
+            [
+                InlineKeyboardButton(text="🔙 Назад", callback_data=f"too_admin_menu"),
+            ]
+        ]
     )
 
 

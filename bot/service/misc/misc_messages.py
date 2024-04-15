@@ -265,6 +265,12 @@ async def admin_panel_main(callback: CallbackQuery):
                 ],
                 [
                     InlineKeyboardButton(
+                        text="📨 Рассылка",
+                        callback_data="admin_mailing"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
                         text="Меню",
                         callback_data="menu"
                     )

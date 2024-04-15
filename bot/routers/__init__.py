@@ -10,6 +10,7 @@ from bot.routers.admin import switch_sub
 from bot.routers.admin import admin_panel
 from bot.routers.admin import back_routers
 from bot.routers.admin.sub import admin_router as sub_admin
+from bot.routers.admin import mailing
 
 from bot.filters.free_attempt import FreeAttempts
 
@@ -33,3 +34,4 @@ def register_all_routers(dp: Dispatcher):
     dp.include_router(admin_panel.router)
     dp.include_router(sub_admin)
     dp.include_router(back_routers.admin_router)
+    dp.include_router(mailing.router)
