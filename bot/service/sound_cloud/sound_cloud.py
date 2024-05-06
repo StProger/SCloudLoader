@@ -25,7 +25,7 @@ class SoundCloud(object):
 
         # assert type(track) is Track
 
-        filename = f'bot/service/sound_cloud/tracks/{user_id}.mp3'
+        filename = f'./tracks/{user_id}.mp3'
 
         await state.update_data(
             artist=track.artist,
