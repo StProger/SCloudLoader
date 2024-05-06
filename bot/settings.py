@@ -52,6 +52,11 @@ class Settings(BaseSettings):
     # Токен CryptoCloud
     CRYPTO_CLOUD_API_TOKEN: str = os.getenv("CRYPTO_CLOUD_API_TOKEN").strip()
 
+    # Публичная оферта
+    public_offer: str = "https://docs.google.com/document/d/1uQXkIOMF_OJDTjCtaRZiRfVs_ZEDEu2-3ksDEt9lRXI"
+    # Обработка персональных данных
+    personal_data: str = "https://docs.google.com/document/d/1meffmKDtaO9G5wZ_G6-O7xt8V7WnukFMkRWHtTsmJlI"
+
     # Цены подписки
     PRICES: dict = {
         "crypto": {

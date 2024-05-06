@@ -120,7 +120,7 @@ async def download_music(
     await state.clear()
 
 
-@router.message(FreeAttempts())
+@router.message(FreeAttempts(), ~(F.text == "/term"))
 async def free_attempts(
         message: types.Message,
         state: FSMContext
@@ -141,9 +141,7 @@ async def free_attempts(
                                         ]
                                     ]
                                 )
-                            )
-                             ,
-                             ).message_id,
+                            )).message_id,
                             )
 
     # await state.set_state("free_attempts:link")
