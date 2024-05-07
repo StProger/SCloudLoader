@@ -24,6 +24,7 @@ class SoundCloud(object):
         print(f"Скачанный трек: {track.title}")
         if track is None:
             return
+        print(f"Ссылка: {track.get_stream_url()}")
 
         # assert type(track) is Track
 
