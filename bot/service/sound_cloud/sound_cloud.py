@@ -21,11 +21,12 @@ class SoundCloud(object):
         """ Скачивание трека """
 
         track: Track = await cls.api.resolve(track_url)
-        print(track.ready)
+        print(track_url)
+        print(track.STREAM_URL)
         print(f"Скачанный трек: {track.title}")
         if track is None:
             return
-        print(f"Ссылка: {await track.get_stream_url()}")
+
 
         # assert type(track) is Track
 
