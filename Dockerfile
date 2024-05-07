@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
-RUN apt update && apt upgrade -y
-RUN apt install ffmpeg -y
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    apt-get clean && \
 
 FROM python:3.12
 WORKDIR /SCloudDownloader
