@@ -91,7 +91,7 @@ async def download_track_(
         except:
             pass
 
-        path_file = f"SCloudDownloader/bot/service/sound_cloud/tracks/{message.from_user.id}.wav"
+        path_file = f"bot/service/sound_cloud/tracks/{message.from_user.id}.wav"
 
         # Отправляем трек
         await message.bot.send_audio(

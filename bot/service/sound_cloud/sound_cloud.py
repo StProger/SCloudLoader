@@ -25,7 +25,7 @@ class SoundCloud(object):
 
         # assert type(track) is Track
 
-        filename = f'SCloudDownloader/bot/service/sound_cloud/tracks/{user_id}.mp3'
+        filename = f'bot/service/sound_cloud/tracks/{user_id}.mp3'
 
         await state.update_data(
             artist=track.artist,
@@ -46,8 +46,8 @@ class SoundCloud(object):
                                  user_id: int):
         """ Конверт в wav """
 
-        sound = AudioSegment.from_mp3(f"SCloudDownloader/bot/service/sound_cloud/tracks/{user_id}.mp3")
-        sound.export(f"SCloudDownloader/bot/service/sound_cloud/tracks/{user_id}.wav", format="wav")
+        sound = AudioSegment.from_mp3(f"bot/service/sound_cloud/tracks/{user_id}.mp3")
+        sound.export(f"bot/service/sound_cloud/tracks/{user_id}.wav", format="wav")
 
 
 async def main():
