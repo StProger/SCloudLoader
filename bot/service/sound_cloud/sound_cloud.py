@@ -6,6 +6,8 @@ from pydub import AudioSegment
 
 import asyncio, os
 
+from ffmpeg.asyncio import FFmpeg
+
 
 class SoundCloud(object):
 
@@ -46,8 +48,20 @@ class SoundCloud(object):
                                  user_id: int):
         """ Конверт в wav """
 
-        sound = AudioSegment.from_mp3(f"bot/service/sound_cloud/tracks/{user_id}.mp3")
-        sound.export(f"bot/service/sound_cloud/tracks/{user_id}.wav", format="wav")
+        ffmpeg = (FFmpeg()
+                  .option("y")
+                  .input(f"bot/service/sound_cloud/tracks/{user_id}.mp3")
+                  .output(
+            f"bot/service/sound_cloud/tracks/{user_id}.wav",
+            {"codec:a": "pcm_s16le"},
+            vn=None,
+            f="wav",
+        ))
+        await ffmpeg.execute()
+        print('Сконвертил')
+
+        # sound = AudioSegment.from_mp3(f"bot/service/sound_cloud/tracks/{user_id}.mp3")
+        # sound.export(f"bot/service/sound_cloud/tracks/{user_id}.wav", format="wav")
 
 
 async def main():
