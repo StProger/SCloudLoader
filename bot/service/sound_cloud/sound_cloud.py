@@ -21,7 +21,10 @@ class SoundCloud(object):
                              state: FSMContext | None = None,) -> bool | None | str:
         """ Скачивание трека """
         try:
-            track: Track = await cls.api.resolve(track_url)
+            try:
+                track: Track = await cls.api.resolve(track_url)
+            except KeyError:
+                return 
 
             if track is None:
                 return
