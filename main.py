@@ -11,6 +11,7 @@ from bot.middlewares import register_all_middlewares
 from bot.routers import register_all_routers
 from bot import logging
 from bot.service.misc.notification_sub import notification_sub
+from bot.bot_commands import set_bot_commands
 
 import asyncio
 
@@ -25,6 +26,8 @@ async def main():
 
     register_all_middlewares(dp)
     register_all_routers(dp)
+
+    await set_bot_commands(bot)
 
     await logging.setup()
 
