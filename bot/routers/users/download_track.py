@@ -6,6 +6,7 @@ from bot.database.models.user import User
 from bot.service.misc.misc_messages import download_track
 from bot.service.redis_serv.user import get_msg_to_delete
 from bot.service.sound_cloud.sound_cloud import SoundCloud
+from bot.keyboards.inline.user import main_menu_key
 
 import os
 
@@ -62,7 +63,18 @@ async def download_track_(
         state=state
     )
 
-    if downloaded_track is None:
+    if downloaded_track == "NOT SUPPORTED":
+        try:
+            await message.bot.delete_message(
+                chat_id=message.chat.id,
+                message_id=downloaded_msg.message_id
+            )
+        except:
+            pass
+        await message.answer("Данный трек недоступен для скачивания.",
+                             reply_markup=main_menu_key())
+
+    elif downloaded_track is None:
 
         try:
             await message.bot.delete_message(
@@ -71,7 +83,8 @@ async def download_track_(
             )
         except:
             pass
-        await message.answer("Произошла ошибка. Убедитесь в корректности ссылки.")
+        await message.answer("Произошла ошибка. Убедитесь в корректности ссылки.",
+                             reply_markup=main_menu_key())
     else:
 
         state_data = await state.get_data()

@@ -7,6 +7,7 @@ from pydub import AudioSegment
 import asyncio, os
 
 from ffmpeg.asyncio import FFmpeg
+from sclib.sync import UnsupportedFormatError
 
 
 class SoundCloud(object):
@@ -17,34 +18,35 @@ class SoundCloud(object):
     async def download_track(cls,
                              track_url: str,
                              user_id: int,
-                             state: FSMContext | None = None,) -> bool | None:
+                             state: FSMContext | None = None,) -> bool | None | str:
         """ Скачивание трека """
+        try:
+            track: Track = await cls.api.resolve(track_url)
 
-        track: Track = await cls.api.resolve(track_url)
-        print(track_url)
-        print(track.STREAM_URL)
-        print(f"Скачанный трек: {track.title}")
-        if track is None:
-            return
+            if track is None:
+                return
 
 
-        # assert type(track) is Track
+            # assert type(track) is Track
 
-        filename = f'bot/service/sound_cloud/tracks/{user_id}.mp3'
+            filename = f'bot/service/sound_cloud/tracks/{user_id}.mp3'
 
-        await state.update_data(
-            artist=track.artist,
-            track_name=track.title
-        )
+            await state.update_data(
+                artist=track.artist,
+                track_name=track.title
+            )
 
-        with open(filename, 'wb+') as file:
-            await track.write_mp3_to(file)
+            with open(filename, 'wb+') as file:
+                await track.write_mp3_to(file)
 
-        await cls.convert_mp3_to_wav(
-            user_id=user_id
-        )
-        os.remove(filename)
-        return True
+            await cls.convert_mp3_to_wav(
+                user_id=user_id
+            )
+            os.remove(filename)
+            return True
+        except UnsupportedFormatError:
+            return "NOT SUPPORTED"
+
 
     @classmethod
     async def convert_mp3_to_wav(cls,

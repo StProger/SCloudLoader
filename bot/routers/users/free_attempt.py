@@ -5,7 +5,7 @@ from aiogram import Router, F, types, exceptions
 from bot.filters.free_attempt import FreeAttempts
 from bot.database.models.sub import Sub
 from bot.database.models.user import User
-from bot.keyboards.inline.user import not_subbed_markup
+from bot.keyboards.inline.user import not_subbed_markup, main_menu_key
 from bot.service.redis_serv.user import get_msg_to_delete, set_msg_to_delete
 from bot.service import SoundCloud
 
@@ -70,8 +70,19 @@ async def download_music(
             user_id=message.from_user.id,
             state=state
         )
-        print(f"Трек: {downloaded_track}")
-        if downloaded_track is None:
+
+        if downloaded_track == "NOT SUPPORTED":
+            try:
+                await message.bot.delete_message(
+                    chat_id=message.chat.id,
+                    message_id=downloaded_msg.message_id
+                )
+            except:
+                pass
+            await message.answer("Данный трек недоступен для скачивания.",
+                                 reply_markup=main_menu_key())
+
+        elif downloaded_track is None:
 
             try:
                 await message.bot.delete_message(

@@ -160,3 +160,16 @@ def choose_card_inline():
             ]
         ]
     )
+
+
+def main_menu_key():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Меню", callback_data="menu"
+                )
+            ]
+        ]
+    )
