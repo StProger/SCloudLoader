@@ -22,7 +22,7 @@ class SoundCloud(object):
         """ Скачивание трека """
         try:
             try:
-                track: Track = await cls.api.resolve(track_url)
+                track: Track = await cls.api.resolve(track_url.replace("m.", "", 1))
             except KeyError:
                 return 
 
