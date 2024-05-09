@@ -21,7 +21,7 @@ NOT_SUBBED = """
 """
 
 
-@router.message(FreeAttempts(), F.text.contains("https://soundcloud"))
+@router.message(FreeAttempts(), F.text.contains("https"))
 async def download_music(
         message: types.Message,
         sponsors: list[Sub],
