@@ -23,7 +23,7 @@ class SoundCloud(object):
                               file_path: str,
                               url: str):
         try:
-            os.system(f"yt-dlp -f mp3 %(fulltitle)s_{filename} -P {file_path} {url}")
+            os.system(f"yt-dlp -f mp3 -o %(fulltitle)s_{filename} -P {file_path} {url}")
         except Exception as ex:
             print(f"Ошибка {ex}")
 
@@ -41,7 +41,7 @@ class SoundCloud(object):
             process_download = Process(target=cls.proces_download_track, args=(filename, file_path, track_url))
 
             process_download.start()
-            process_download.join()
+            process_download.join(timeout=10)
             print("начал качать")
             list_files = os.listdir(file_path)
 
