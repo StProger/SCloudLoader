@@ -22,8 +22,10 @@ class SoundCloud(object):
                               filename: str,
                               file_path: str,
                               url: str):
-
-        os.system(f"yt-dlp -f mp3 %(fulltitle)s_{filename} -P {file_path} {url}")
+        try:
+            os.system(f"yt-dlp -f mp3 %(fulltitle)s_{filename} -P {file_path} {url}")
+        except Exception as ex:
+            print(f"Ошибка {ex}")
 
     @classmethod
     async def download_track(cls,

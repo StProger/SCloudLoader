@@ -1,4 +1,5 @@
 import sys
+import os
 
 from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.redis import RedisStorage
@@ -18,6 +19,8 @@ import asyncio
 
 async def main():
 
+    if not(os.path.exists("bot/service/sound_cloud/tracks")):
+        os.mkdir("bot/service/sound_cloud/tracks")
     storage = RedisStorage.from_url(settings.fsm_redis_url)
 
     dp = Dispatcher(storage=storage)
