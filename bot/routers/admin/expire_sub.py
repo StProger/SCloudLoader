@@ -5,6 +5,8 @@ from bot.filters.admin_filter import IsAdmin
 
 from bot.database.models.user import User
 
+import yt_dlp
+
 
 router = Router()
 

@@ -99,9 +99,8 @@ async def download_music(
             state_data = await state.get_data()
 
             # Получаем данные о треке
-            artist = state_data['artist']
-            track_name = state_data['track_name']
-            title = artist + " - " + track_name
+            title_track = state_data["title_track"]
+            filename_track = state_data["filename"]
 
             try:
                 await message.bot.delete_message(
@@ -113,7 +112,7 @@ async def download_music(
             except:
                 pass
 
-            path_file = f"./bot/service/sound_cloud/tracks/{message.from_user.id}.wav"
+            path_file = f"./bot/service/sound_cloud/tracks/{filename_track}"
 
             # Добавляем бесплатную попытку
             user.free_attempts = tortoise.expressions.F("free_attempts") + 1
@@ -123,7 +122,7 @@ async def download_music(
             await message.bot.send_audio(
                 chat_id=message.chat.id,
                 audio=types.FSInputFile(path_file),
-                title=title,
+                title=title_track,
                 request_timeout=60
             )
 
