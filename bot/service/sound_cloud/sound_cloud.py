@@ -70,8 +70,7 @@ class SoundCloud(object):
             )
             for file in list_files:
                 os.remove(file_path + "/" + file)
-            # os.remove(file_path + "/" + file_name_track)
-            process_download.join()
+
             return True
         except Exception as ex:
             print(ex)
