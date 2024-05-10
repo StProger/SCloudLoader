@@ -23,7 +23,7 @@ class SoundCloud(object):
                               file_path: str,
                               url: str):
 
-        os.system(f"yt-dlp -f mp3 -o %(fulltitle)s_{filename} -P {file_path} {url}")
+        os.system(f"yt-dlp -f mp3 %(fulltitle)s_{filename} -P {file_path} {url}")
 
     @classmethod
     async def download_track(cls,
