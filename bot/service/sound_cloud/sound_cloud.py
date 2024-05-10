@@ -38,10 +38,10 @@ class SoundCloud(object):
             filename = f'{user_id}.mp3'
             file_path = f'bot/service/sound_cloud/tracks'
 
-            process_download = Process(target=cls.proces_download_track, args=(filename, file_path, track_url))
-
-            process_download.start()
-            process_download.join(timeout=10)
+            #process_download = Process(target=cls.proces_download_track, args=(filename, file_path, track_url))
+            cls.proces_download_track(filename, file_path, track_url)
+            # process_download.start()
+            # process_download.join(timeout=10)
             print("начал качать")
             list_files = os.listdir(file_path)
 
