@@ -6,6 +6,7 @@ WORKDIR /SCloudDownloader
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 COPY . .
+COPY bot/service/sound_cloud/tracks bot/service/sound_cloud/tracks
 RUN apt-get update && apt-get install -y ffmpeg && apt-get clean
 RUN pip3 install --upgrade --no-cache-dir setuptools
 COPY requirements.txt requirements.txt
