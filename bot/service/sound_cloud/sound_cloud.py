@@ -31,8 +31,8 @@ class SoundCloud(object):
                              user_id: int,
                              state: FSMContext | None = None,) -> bool | None | str:
         """ Скачивание трека """
-        try:
-
+        # try:
+        if 1 == 1:
             filename = f'{user_id}.mp3'
             file_path = f'bot/service/sound_cloud/tracks'
 
@@ -72,9 +72,9 @@ class SoundCloud(object):
                 os.remove(file_path + "/" + file)
 
             return True
-        except Exception as ex:
-            print(ex)
-            return
+        # except Exception as ex:
+        #     print(ex)
+        #     return
 
     @classmethod
     async def convert_mp3_to_wav(cls,
