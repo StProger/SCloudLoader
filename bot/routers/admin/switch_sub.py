@@ -65,7 +65,7 @@ async def switch_on_sub(
         state: FSMContext
 ):
 
-    username = message.text.replace("@", "").replace("https://t.me/", "")
+    username = message.text.replace("@", "").replace("https://t.me/", "").lower()
 
     user: User = await User.get_or_none(username=username)
 
@@ -116,7 +116,7 @@ async def switch_on_sub(
         state: FSMContext
 ):
 
-    username = message.text.replace("@", "").replace("https://t.me/", "")
+    username = message.text.replace("@", "").replace("https://t.me/", "").lower()
     user: User = await User.get_or_none(username=username)
 
     try:
