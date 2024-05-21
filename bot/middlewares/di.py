@@ -6,8 +6,10 @@ from typing import Callable, Dict, Awaitable, Any
 from aiogram import BaseMiddleware
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
+from pyrogram import Client
 
 from bot.database.models.user import User
+from bot.settings import settings
 
 
 # Проверка юзера в БД и его добавление
@@ -72,7 +74,13 @@ class ExistsUserMiddleware(BaseMiddleware):
 
                 if username.lower() != get_user.username:
                     await get_user.update_from_dict({"useranme": username}).save()
-
+            # client = Client(
+            #     "client",
+            #     api_id=settings.API_ID,
+            #     bot_token=settings.BOT_TOKEN
+            # )
+            #
+            # data["client"] = client
             data['user'] = await (User.filter(user_id=user_id)
                                   .first()
                                   )

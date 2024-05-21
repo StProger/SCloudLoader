@@ -18,5 +18,5 @@ def register_all_middlewares(dp: Dispatcher):
     free_attempt.router.callback_query.outer_middleware(SubMiddleware())
 
     dp.message.middleware(ThrottlingMiddleware())
-    dp.message.middleware(DIClient())
-    dp.callback_query.middleware(DIClient())
+    # dp.message.outer_middleware(DIClient())
+    # dp.callback_query.outer_middleware(DIClient())

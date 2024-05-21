@@ -16,7 +16,7 @@ from bot.bot_commands import set_bot_commands
 
 import asyncio
 
-from pyrogram import Client
+from loader import client
 
 
 async def main():
@@ -26,14 +26,9 @@ async def main():
     storage = RedisStorage.from_url(settings.fsm_redis_url)
 
     dp = Dispatcher(storage=storage)
+    dp["client"] = client
 
     bot = Bot(settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML", link_preview_is_disabled=True))
-
-    client = Client(
-        "client",
-        api_id=settings.API_ID,
-        api_hash=settings.API_HASH
-    )
 
     register_all_middlewares(dp)
     register_all_routers(dp)
@@ -48,7 +43,6 @@ async def main():
     try:
 
         await db.init(TORTOISE_CONFIG)
-        await client.start()
         await dp.start_polling(bot)
 
     except KeyboardInterrupt:
@@ -59,4 +53,7 @@ async def main():
 
 if __name__ == '__main__':
 
-    asyncio.run(main())
+    #asyncio.run(main())
+    asyncio.get_event_loop().create_task(main())
+
+    client.run()
