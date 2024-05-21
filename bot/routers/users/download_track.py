@@ -11,6 +11,7 @@ from bot.keyboards.inline.user import main_menu_key
 
 import os
 
+from bot.settings import settings
 
 router = Router()
 
@@ -108,10 +109,17 @@ async def download_track_(
         path_file = f"bot/service/sound_cloud/tracks/{filename_track}"
         print(path_file)
         # Отправляем трек
-        await client.send_audio(
-            chat_id=message.chat.id,
+
+        mes = await client.send_audio(
+            chat_id=settings.CHANNEL_ID_MUSIC,
             audio=path_file,
             title=title_track
+        )
+
+        await message.bot.copy_message(
+            chat_id=message.from_user.id,
+            from_chat_id=settings.CHANNEL_ID_MUSIC,
+            message_id=mes.id
         )
 
         # await message.bot.send_audio(

@@ -17,9 +17,8 @@ class DIClient(BaseMiddleware):
                        data):
 
         client = Client(
-            "bot",
+            "client",
             api_id=settings.API_ID,
-            api_hash=settings.API_HASH,
             bot_token=settings.BOT_TOKEN
         )
 

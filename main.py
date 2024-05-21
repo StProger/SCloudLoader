@@ -30,10 +30,9 @@ async def main():
     bot = Bot(settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML", link_preview_is_disabled=True))
 
     client = Client(
-        "bot",
+        "client",
         api_id=settings.API_ID,
-        api_hash=settings.API_HASH,
-        bot_token=settings.BOT_TOKEN
+        api_hash=settings.API_HASH
     )
 
     register_all_middlewares(dp)

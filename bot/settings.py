@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     API_ID: int = os.getenv("API_ID").strip()
     API_HASH: str = os.getenv("API_HASH").strip()
 
+    # ID канала с музыкой
+    CHANNEL_ID_MUSIC: int = os.getenv("CHANNEL_ID_MUSIC").strip()
+
     # Путь к логам
     PATH_LOGS: str = "bot/data/logs.log"
 

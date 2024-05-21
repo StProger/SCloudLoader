@@ -9,6 +9,7 @@ from bot.database.models.user import User
 from bot.keyboards.inline.user import not_subbed_markup, main_menu_key
 from bot.service.redis_serv.user import get_msg_to_delete, set_msg_to_delete
 from bot.service import SoundCloud
+from bot.settings import settings
 
 import os
 
@@ -120,10 +121,16 @@ async def download_music(
             user.free_attempts = tortoise.expressions.F("free_attempts") + 1
             await user.save()
 
-            await client.send_audio(
-                chat_id=message.from_user.id,
+            mes = await client.send_audio(
+                chat_id=settings.CHANNEL_ID_MUSIC,
                 audio=path_file,
                 title=title_track
+            )
+
+            await message.bot.copy_message(
+                chat_id=message.from_user.id,
+                from_chat_id=settings.CHANNEL_ID_MUSIC,
+                message_id=mes.id
             )
 
             # Отправляем трек
