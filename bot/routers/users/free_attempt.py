@@ -115,7 +115,7 @@ async def download_music(
             except:
                 pass
 
-            path_file = f"./bot/service/sound_cloud/tracks/{filename_track}"
+            path_file = f"./bot/service/sound_cloud/tracks/{filename_track.replace("'", "")}"
 
             # Добавляем бесплатную попытку
             user.free_attempts = tortoise.expressions.F("free_attempts") + 1
