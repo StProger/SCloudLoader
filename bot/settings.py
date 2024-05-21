@@ -29,6 +29,10 @@ class Settings(BaseSettings):
     REDIS_HOST: str = os.getenv("REDIS_HOST").strip()
     REDIS_DB: int = os.getenv("REDIS_DB").strip()
 
+    # API_ID и API_HASH для авторизации бота pyrogram
+    API_ID: int = os.getenv("API_ID").strip()
+    API_HASH: str = os.getenv("API_HASH").strip()
+
     # Путь к логам
     PATH_LOGS: str = "bot/data/logs.log"
 
