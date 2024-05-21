@@ -1,6 +1,7 @@
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram import Router, F, types, exceptions
+from pyrogram import Client
 
 from bot.filters.free_attempt import FreeAttempts
 from bot.database.models.sub import Sub
@@ -26,7 +27,8 @@ async def download_music(
         message: types.Message,
         sponsors: list[Sub],
         state: FSMContext,
-        user: User
+        user: User,
+        client: Client
 ):
 
     try:
@@ -118,13 +120,19 @@ async def download_music(
             user.free_attempts = tortoise.expressions.F("free_attempts") + 1
             await user.save()
 
-            # Отправляем трек
-            await message.bot.send_audio(
-                chat_id=message.chat.id,
-                audio=types.FSInputFile(path_file),
-                title=title_track,
-                request_timeout=60
+            await client.send_audio(
+                chat_id=message.from_user.id,
+                audio=path_file,
+                title=title_track
             )
+
+            # Отправляем трек
+            # await message.bot.send_audio(
+            #     chat_id=message.chat.id,
+            #     audio=types.FSInputFile(path_file),
+            #     title=title_track,
+            #     request_timeout=60
+            # )
 
             os.remove(path_file)
     await state.clear()

@@ -16,6 +16,8 @@ from bot.bot_commands import set_bot_commands
 
 import asyncio
 
+from pyrogram import Client
+
 
 async def main():
 
@@ -26,6 +28,13 @@ async def main():
     dp = Dispatcher(storage=storage)
 
     bot = Bot(settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML", link_preview_is_disabled=True))
+
+    client = Client(
+        "bot",
+        api_id=settings.API_ID,
+        api_hash=settings.API_HASH,
+        bot_token=settings.BOT_TOKEN
+    )
 
     register_all_middlewares(dp)
     register_all_routers(dp)
@@ -40,6 +49,7 @@ async def main():
     try:
 
         await db.init(TORTOISE_CONFIG)
+        await client.start()
         await dp.start_polling(bot)
 
     except KeyboardInterrupt:

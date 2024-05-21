@@ -1,6 +1,7 @@
 from aiogram import Router, F, types
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
+from pyrogram import Client
 
 from bot.database.models.user import User
 from bot.service.misc.misc_messages import download_track
@@ -39,7 +40,8 @@ async def get_link_track(
 )
 async def download_track_(
         message: types.Message,
-        state: FSMContext
+        state: FSMContext,
+        client: Client
 ):
 
     try:
@@ -106,12 +108,18 @@ async def download_track_(
         path_file = f"bot/service/sound_cloud/tracks/{filename_track}"
         print(path_file)
         # Отправляем трек
-        await message.bot.send_audio(
+        await client.send_audio(
             chat_id=message.chat.id,
-            audio=types.FSInputFile(path_file),
-            title=title_track,
-            request_timeout=180
+            audio=path_file,
+            title=title_track
         )
+
+        # await message.bot.send_audio(
+        #     chat_id=message.chat.id,
+        #     audio=types.FSInputFile(path_file),
+        #     title=title_track,
+        #     request_timeout=180
+        # )
 
         os.remove(path_file)
 
