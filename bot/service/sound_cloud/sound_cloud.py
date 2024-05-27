@@ -85,7 +85,7 @@ class SoundCloud(object):
                   .option("y")
                   .input(f"bot/service/sound_cloud/tracks/{filename}")
                   .output(
-            f"bot/service/sound_cloud/tracks/{filename.replace(".mp3", "")}.wav",
+            f"bot/service/sound_cloud/tracks/{filename.replace('.mp3', '')}.wav",
             {"codec:a": "pcm_s16le"},
             vn=None,
             f="wav",
