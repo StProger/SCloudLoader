@@ -106,7 +106,7 @@ async def download_track_(
         except:
             pass
 
-        path_file = f"bot/service/sound_cloud/tracks/{filename_track.replace("'", "")}"
+        path_file = f"bot/service/sound_cloud/tracks/{filename_track.replace("\'", "")}"
         print(path_file)
         # Отправляем трек
 
