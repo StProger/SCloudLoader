@@ -104,6 +104,7 @@ async def download_music(
             # Получаем данные о треке
             title_track = state_data["title_track"]
             filename_track = state_data["filename"]
+            filename_track = filename_track.replace("'", "")
 
             try:
                 await message.bot.delete_message(
@@ -115,7 +116,7 @@ async def download_music(
             except:
                 pass
 
-            path_file = f"./bot/service/sound_cloud/tracks/{filename_track.replace("\'", "")}"
+            path_file = f"./bot/service/sound_cloud/tracks/{filename_track}"
 
             # Добавляем бесплатную попытку
             user.free_attempts = tortoise.expressions.F("free_attempts") + 1
