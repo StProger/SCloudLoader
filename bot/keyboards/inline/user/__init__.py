@@ -1,6 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from bot.database.models.sub import Sub
+from bot.settings import settings
 
 
 def not_subbed_markup(sponsors: list[Sub]):
@@ -109,18 +110,18 @@ def download_track_inline():
 
 
 def choose_crypto_inline():
-
+    PRICES = settings.PRICES
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="1 месяц", callback_data="month_crypto_1"
+                    text=f"1 месяц - {PRICES['crypto'][1]['price']}", callback_data="month_crypto_1"
                 ),
                 InlineKeyboardButton(
-                    text="3 месяца", callback_data="month_crypto_3"
+                    text=f"3 месяца - {PRICES['crypto'][3]['price']}", callback_data="month_crypto_3"
                 ),
                 InlineKeyboardButton(
-                    text="6 месяцев", callback_data="month_crypto_6"
+                    text=f"6 месяцев - {PRICES['crypto'][6]['price']}", callback_data="month_crypto_6"
                 )
             ],
             [
@@ -137,17 +138,18 @@ def choose_crypto_inline():
 
 def choose_card_inline():
 
+    PRICES = settings.PRICES
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="1 месяц", callback_data="month_card_1"
+                    text=f"1 месяц - {PRICES['card'][1]['price']}", callback_data="month_card_1"
                 ),
                 InlineKeyboardButton(
-                    text="3 месяца", callback_data="month_card_3"
+                    text=f"3 месяца - {PRICES['card'][3]['price']}", callback_data="month_card_3"
                 ),
                 InlineKeyboardButton(
-                    text="6 месяцев", callback_data="month_card_6"
+                    text=f"6 месяцев - {PRICES['card'][6]['price']}", callback_data="month_card_6"
                 )
             ],
             [

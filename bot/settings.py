@@ -68,29 +68,29 @@ class Settings(BaseSettings):
     PRICES: dict = {
         "crypto": {
             1: {
-                "price": 50,
+                "price": 300,
                 "month": None
             },
             3: {
-                "price": 2399,
+                "price": 600,
                 "month": 799
             },
-            6: {
-                "price": 4199,
+            12: {
+                "price": 1200,
                 "month": 699
             }
         },
         "card": {
             1: {
-                "price": 1099,
+                "price": 300,
                 "month": None
             },
             3: {
-                "price": 2499,
+                "price": 600,
                 "month": None
             },
-            6: {
-                "price": 4299,
+            12: {
+                "price": 1200,
                 "month": None
             }
         }

@@ -72,8 +72,8 @@ async def crypto_menu(callback: CallbackQuery):
     PRICES = settings.PRICES
 
     text = f"""1 месяц - <b>{PRICES['crypto'][1]['price']}₽</b>
-3 месяца - <b>{PRICES['crypto'][3]['price']}₽</b> ({PRICES['crypto'][3]['month']} за месяц)
-6 месяцев - <b>{PRICES['crypto'][6]['price']}₽</b> ({PRICES['crypto'][6]['month']} за месяц)"""
+3 месяца - <b>{PRICES['crypto'][3]['price']}₽</b>
+12 месяцев - <b>{PRICES['crypto'][6]['price']}₽</b>"""
 
     await callback.message.edit_text(
         text=text,
@@ -87,7 +87,7 @@ async def card_menu(callback: CallbackQuery):
 
     text = f"""1 месяц - <b>{PRICES['card'][1]['price']}₽</b>
 3 месяца - <b>{PRICES['card'][3]['price']}₽</b> 
-6 месяцев - <b>{PRICES['card'][6]['price']}₽</b>"""
+12 месяцев - <b>{PRICES['card'][6]['price']}₽</b>"""
 
     await callback.message.edit_text(
         text=text,
