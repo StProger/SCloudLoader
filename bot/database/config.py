@@ -24,5 +24,4 @@ TORTOISE_CONFIG = {
 
     },
     'timezone': 'Europe/Moscow',
-
 }
