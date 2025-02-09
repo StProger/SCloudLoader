@@ -115,13 +115,13 @@ def choose_crypto_inline():
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text=f"1 месяц - {PRICES['crypto'][1]['price']}", callback_data="month_crypto_1"
+                    text=f"1 месяц - {PRICES['crypto'][1]['price']}₽", callback_data="month_crypto_1"
                 ),
                 InlineKeyboardButton(
-                    text=f"3 месяца - {PRICES['crypto'][3]['price']}", callback_data="month_crypto_3"
+                    text=f"3 месяца - {PRICES['crypto'][3]['price']}₽", callback_data="month_crypto_3"
                 ),
                 InlineKeyboardButton(
-                    text=f"12 месяцев - {PRICES['crypto'][12]['price']}", callback_data="month_crypto_6"
+                    text=f"12 месяцев - {PRICES['crypto'][12]['price']}₽", callback_data="month_crypto_6"
                 )
             ],
             [
@@ -143,13 +143,13 @@ def choose_card_inline():
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text=f"1 месяц - {PRICES['card'][1]['price']}", callback_data="month_card_1"
+                    text=f"1 месяц - {PRICES['card'][1]['price']}₽", callback_data="month_card_1"
                 ),
                 InlineKeyboardButton(
-                    text=f"3 месяца - {PRICES['card'][3]['price']}", callback_data="month_card_3"
+                    text=f"3 месяца - {PRICES['card'][3]['price']}₽", callback_data="month_card_3"
                 ),
                 InlineKeyboardButton(
-                    text=f"12 месяцев - {PRICES['card'][12]['price']}", callback_data="month_card_6"
+                    text=f"12 месяцев - {PRICES['card'][12]['price']}₽", callback_data="month_card_6"
                 )
             ],
             [
