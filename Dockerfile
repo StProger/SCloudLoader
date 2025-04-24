@@ -6,7 +6,7 @@ WORKDIR /SCloudDownloader
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 COPY requirements.txt requirements.txt
-RUN pip3 install --upgrade --no-cache-dir setuptools
+# RUN pip3 install --upgrade --no-cache-dir setuptools
 RUN pip3 install --no-cache-dir -r requirements.txt && chmod 755 .
 RUN apt-get update && apt-get install -y ffmpeg && apt-get clean
 COPY . .
