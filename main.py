@@ -27,8 +27,9 @@ async def main():
     storage = RedisStorage.from_url(settings.fsm_redis_url)
     client = Client(
         "client",
+        no_updates=True
     )
-    await client.connect()
+    await client.start()
     dp = Dispatcher(storage=storage)
     dp["client"] = client
 
@@ -53,7 +54,7 @@ async def main():
         sys.exit(1)
     finally:
         await bot.session.close()
-        await client.disconnect()
+        await client.stop()
 
 
 if __name__ == '__main__':
