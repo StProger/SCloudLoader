@@ -28,7 +28,7 @@ async def main():
     client = Client(
         "client",
     )
-    await client.start()
+    await client.connect()
     dp = Dispatcher(storage=storage)
     dp["client"] = client
 
@@ -53,7 +53,7 @@ async def main():
         sys.exit(1)
     finally:
         await bot.session.close()
-        await client.stop()
+        await client.disconnect()
 
 
 if __name__ == '__main__':
