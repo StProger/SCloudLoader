@@ -27,7 +27,8 @@ async def main():
     storage = RedisStorage.from_url(settings.fsm_redis_url)
     client = Client(
         "client",
-        no_updates=True
+        no_updates=True,
+        workers=0
     )
     await client.start()
     dp = Dispatcher(storage=storage)
