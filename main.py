@@ -28,7 +28,6 @@ async def main():
     client = Client(
         "client",
         no_updates=True,
-        workers=0
     )
     await client.start()
     dp = Dispatcher(storage=storage)
