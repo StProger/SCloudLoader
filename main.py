@@ -4,6 +4,7 @@ import os
 from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.redis import RedisStorage
 from aiogram import Dispatcher, Bot
+from pyrogram import Client
 
 from bot.database.config import db, TORTOISE_CONFIG
 from bot.database.models.user import User
@@ -16,7 +17,7 @@ from bot.bot_commands import set_bot_commands
 
 import asyncio
 
-from loader import client
+# from loader import client
 
 
 async def main():
@@ -24,7 +25,10 @@ async def main():
     if not(os.path.exists("bot/service/sound_cloud/tracks")):
         os.mkdir("bot/service/sound_cloud/tracks")
     storage = RedisStorage.from_url(settings.fsm_redis_url)
-    await client.connect()
+    client = Client(
+        "client",
+    )
+    await client.start()
     dp = Dispatcher(storage=storage)
     dp["client"] = client
 
@@ -49,7 +53,7 @@ async def main():
         sys.exit(1)
     finally:
         await bot.session.close()
-        await client.disconnect()
+        await client.stop()
 
 
 if __name__ == '__main__':
