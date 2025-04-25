@@ -5,6 +5,7 @@ FROM python:3.12
 WORKDIR /SCloudDownloader
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV PYTHONASYNCIODEBUG=0
 RUN apt-get update && apt-get install nano
 COPY requirements.txt requirements.txt
 # RUN pip3 install --upgrade --no-cache-dir setuptools
