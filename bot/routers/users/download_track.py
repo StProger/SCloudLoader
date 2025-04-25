@@ -113,11 +113,11 @@ async def download_track_(
         print(path_file)
         # Отправляем трек
 
-        mes = await asyncio.create_task(client.send_audio(
+        mes = await client.send_audio(
             chat_id=settings.CHANNEL_ID_MUSIC,
             audio=path_file,
             title=title_track
-        ))
+        )
 
         await message.bot.copy_message(
             chat_id=message.from_user.id,
