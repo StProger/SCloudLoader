@@ -39,12 +39,10 @@ async def main():
     register_all_routers(dp)
 
     await set_bot_commands(bot)
-
     await logging.setup()
 
     BOT_SCHEDULER.add_job(notification_sub, trigger="interval", hours=24, args=(bot,))
     BOT_SCHEDULER.start()
-
     try:
 
         await db.init(TORTOISE_CONFIG)
@@ -58,7 +56,7 @@ async def main():
 
 
 if __name__ == '__main__':
-
+    asyncio.get_event_loop().set_debug(False)
     asyncio.run(main())
     #asyncio.get_event_loop().create_task(main())
     # client.run()
