@@ -24,7 +24,7 @@ async def main():
     if not(os.path.exists("bot/service/sound_cloud/tracks")):
         os.mkdir("bot/service/sound_cloud/tracks")
     storage = RedisStorage.from_url(settings.fsm_redis_url)
-
+    await client.start()
     dp = Dispatcher(storage=storage)
     dp["client"] = client
 
@@ -49,10 +49,11 @@ async def main():
         sys.exit(1)
     finally:
         await bot.session.close()
+        await client.stop()
 
 
 if __name__ == '__main__':
 
     asyncio.run(main())
     #asyncio.get_event_loop().create_task(main())
-    client.run()
+    # client.run()
