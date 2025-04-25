@@ -1,3 +1,5 @@
+import asyncio
+
 from aiogram import Router, F, types
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
@@ -111,11 +113,11 @@ async def download_track_(
         print(path_file)
         # Отправляем трек
 
-        mes = await client.send_audio(
+        mes = await asyncio.create_task(client.send_audio(
             chat_id=settings.CHANNEL_ID_MUSIC,
             audio=path_file,
             title=title_track
-        )
+        ))
 
         await message.bot.copy_message(
             chat_id=message.from_user.id,
