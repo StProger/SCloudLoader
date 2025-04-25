@@ -16,7 +16,7 @@ from bot.bot_commands import set_bot_commands
 
 import asyncio
 
-# from loader import client
+from loader import client
 
 
 async def main():
@@ -26,7 +26,7 @@ async def main():
     storage = RedisStorage.from_url(settings.fsm_redis_url)
 
     dp = Dispatcher(storage=storage)
-    # dp["client"] = client
+    dp["client"] = client
 
     bot = Bot(settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML", link_preview_is_disabled=True))
 
