@@ -149,12 +149,14 @@ async def download_music(
 @router.message(FreeAttempts(), ~(F.text == "/term"))
 async def free_attempts(
         message: types.Message,
-        state: FSMContext
+        state: FSMContext,
+        user: User
 ):
 
     await set_msg_to_delete(message.from_user.id,
                             (await message.answer(
-                                text="""
+                                text=f"""
+У вас есть <code>{2 - user.free_attempts}</code> <b>бесплатных попыток</b> скачать музыку.
 Отправь мне ссылку трека 🔗 на SoundCloud 👇
 """,
                                 reply_markup=types.InlineKeyboardMarkup(
