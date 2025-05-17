@@ -100,9 +100,9 @@ async def stars_menu(callback: CallbackQuery):
 
     PRICES = settings.PRICES
 
-    text = f"""1 месяц - <b>{PRICES['stars'][1]['price']}₽</b>
-3 месяца - <b>{PRICES['stars'][3]['price']}₽</b> 
-12 месяцев - <b>{PRICES['stars'][12]['price']}₽</b>"""
+    text = f"""1 месяц - <b>{PRICES['stars'][1]['price']}🌟</b>
+3 месяца - <b>{PRICES['stars'][3]['price']}🌟</b> 
+12 месяцев - <b>{PRICES['stars'][12]['price']}🌟</b>"""
 
     await callback.message.edit_text(
         text=text,
