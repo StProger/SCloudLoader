@@ -73,6 +73,7 @@ async def expecting_paid_lava(
             count_month = order.count_month
             user.subscription_to = (user.subscription_to + timedelta(days=count_month * 30))
             await user.save()
+            await order.save()
             try:
                 await bot.delete_message(
                     chat_id=user_id,

@@ -1,9 +1,12 @@
-from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
+from datetime import timedelta
+
+from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice
 
 from bot.keyboards.inline.user import main_inline, main_inline_admin
 from bot.keyboards.inline.user import download_track_inline
 from bot.keyboards.inline.user import choose_crypto_inline
 from bot.keyboards.inline.user import choose_card_inline
+from bot.routers.admin.switch_sub import menu_inline
 
 from bot.service.redis_serv.user import set_msg_to_delete
 from bot.service.payments.crypto_cloud.expecting_paid import expecting_paid_crypto
@@ -92,6 +95,19 @@ async def card_menu(callback: CallbackQuery):
     await callback.message.edit_text(
         text=text,
         reply_markup=choose_card_inline()
+    )
+
+async def stars_menu(callback: CallbackQuery):
+
+    PRICES = settings.PRICES
+
+    text = f"""1 месяц - <b>{PRICES['stars'][1]['price']}₽</b>
+3 месяца - <b>{PRICES['stars'][3]['price']}₽</b> 
+12 месяцев - <b>{PRICES['stars'][12]['price']}₽</b>"""
+
+    await callback.message.edit_text(
+        text=text,
+        reply_markup=choose_stars_inline()
     )
 
 
@@ -196,6 +212,43 @@ async def create_invoice_card_pay(
                                  reply_markup=link_pay_inline
                              )).message_id)
 
+
+async def create_invoice_stars_pay(
+        callback: CallbackQuery,
+        user: User
+):
+
+    PRICES = settings.PRICES
+    count_month = int(callback.data.split("_")[-1])
+    order: Order = await Order.create(
+        count_month=count_month,
+        user_id=user.user_id
+    )
+    price_sub = PRICES["crypto"][count_month]['price']
+    prices = [LabeledPrice(label="XTR", amount=price_sub)]
+    await callback.message.answer_invoice(
+        title=f"Покупка подписки на {count_month} месяца",
+        description=f"К оплате {price_sub}🌟",
+        prices=prices,
+        provider_token="",
+        payload=str(order.order_id),
+        currency="XTR"
+    )
+
+
+async def successful_payment_stars(message: Message, order_id: int, user: User):
+    order: Order = await Order.filter(order_id=order_id).first()
+    order.status_paid = True
+    count_month = order.count_month
+    user.subscription_to = (user.subscription_to + timedelta(days=count_month * 30))
+    await user.save()
+    await order.save()
+
+    await message.answer(
+        text="Оплата подписки прошла успешно✅",
+        reply_markup=menu_inline
+    )
+    return
 
 
 async def referal_system(

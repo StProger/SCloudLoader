@@ -93,6 +93,20 @@ class Settings(BaseSettings):
                 "price": 1200,
                 "month": None
             }
+        },
+        "stars": {
+            1: {
+                "price": 1,
+                "month": None
+            },
+            3: {
+                "price": 1,
+                "month": None
+            },
+            12: {
+                "price": 1,
+                "month": None
+            }
         }
     }
 

@@ -79,8 +79,11 @@ def sub_inline():
                     text="Crypto (CryptoCloud)", callback_data="crypto_pay_sub"
                 ),
                 InlineKeyboardButton(
-                    text="Карта (Lava)", callback_data="card_pay_sub"
+                    text='Звёзды 🌟', callback_data="stars_pay_sub"
                 )
+                # InlineKeyboardButton(
+                #     text="Карта (Lava)", callback_data="card_pay_sub"
+                # )
             ],
             [
                 InlineKeyboardButton(
@@ -150,6 +153,34 @@ def choose_card_inline():
                 ),
                 InlineKeyboardButton(
                     text=f"12 месяцев - {PRICES['card'][12]['price']}₽", callback_data="month_card_12"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Назад", callback_data="sub_user"
+                ),
+                InlineKeyboardButton(
+                    text="Меню", callback_data="menu"
+                )
+            ]
+        ]
+    )
+
+
+def choose_stars_inline():
+
+    PRICES = settings.PRICES
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text=f"1 месяц - {PRICES['stars'][1]['price']}🌟", callback_data="month_stars_1"
+                ),
+                InlineKeyboardButton(
+                    text=f"3 месяца - {PRICES['stars'][3]['price']}🌟", callback_data="month_stars_3"
+                ),
+                InlineKeyboardButton(
+                    text=f"12 месяцев - {PRICES['stars'][12]['price']}🌟", callback_data="month_stars_12"
                 )
             ],
             [

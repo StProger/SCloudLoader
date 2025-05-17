@@ -12,6 +12,7 @@ from bot.routers.admin import back_routers
 from bot.routers.admin.sub import admin_router as sub_admin
 from bot.routers.admin import mailing
 from bot.routers.users import terms
+from bot.routers.users import buy_sub_stars
 
 from bot.filters.free_attempt import FreeAttempts
 
@@ -25,6 +26,7 @@ def register_all_routers(dp: Dispatcher):
 
     dp.include_router(free_attempt.router)
     dp.include_router(start.router)
+    dp.include_router(buy_sub_stars.router)
     dp.include_router(download_track.router)
     dp.include_router(sub.router)
     dp.include_router(buy_sub_crypto.router)
