@@ -17,7 +17,7 @@ def not_subbed_markup(sponsors: list[Sub]):
     )
 
 
-def main_inline():
+def main_inline() -> InlineKeyboardMarkup:
 
     return InlineKeyboardMarkup(
         inline_keyboard=[

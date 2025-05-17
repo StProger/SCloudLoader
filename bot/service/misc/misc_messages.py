@@ -2,11 +2,10 @@ from datetime import timedelta
 
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice
 
-from bot.keyboards.inline.user import main_inline, main_inline_admin
+from bot.keyboards.inline.user import main_inline, main_inline_admin, choose_stars_inline
 from bot.keyboards.inline.user import download_track_inline
 from bot.keyboards.inline.user import choose_crypto_inline
 from bot.keyboards.inline.user import choose_card_inline
-from bot.routers.admin.switch_sub import menu_inline
 
 from bot.service.redis_serv.user import set_msg_to_delete
 from bot.service.payments.crypto_cloud.expecting_paid import expecting_paid_crypto
@@ -246,7 +245,7 @@ async def successful_payment_stars(message: Message, order_id: int, user: User):
 
     await message.answer(
         text="Оплата подписки прошла успешно✅",
-        reply_markup=menu_inline
+        reply_markup=main_inline()
     )
     return
 
