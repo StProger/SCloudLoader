@@ -223,7 +223,7 @@ async def create_invoice_stars_pay(
         count_month=count_month,
         user_id=user.user_id
     )
-    price_sub = PRICES["crypto"][count_month]['price']
+    price_sub = PRICES["stars"][count_month]['price']
     prices = [LabeledPrice(label="XTR", amount=price_sub)]
     await callback.message.answer_invoice(
         title=f"Покупка подписки на {count_month} месяца",
