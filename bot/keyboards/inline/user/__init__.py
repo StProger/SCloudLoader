@@ -75,9 +75,9 @@ def sub_inline():
     return InlineKeyboardMarkup(
         inline_keyboard=[
             [
-                InlineKeyboardButton(
-                    text="Crypto (CryptoCloud)", callback_data="crypto_pay_sub"
-                ),
+                # InlineKeyboardButton(
+                #     text="Crypto (CryptoCloud)", callback_data="crypto_pay_sub"
+                # ),
                 InlineKeyboardButton(
                     text='Звёзды 🌟', callback_data="stars_pay_sub"
                 )
