@@ -63,7 +63,7 @@ def main_inline_admin():
                     text="Реферальная система", callback_data="ref_system"
                 ),
                 InlineKeyboardButton(
-                    text="Тех. поддержка", url="@vzavyazkebot"
+                    text="Тех. поддержка", url="https://t.me/vzavyazkebot"
                 )
             ]
         ]
