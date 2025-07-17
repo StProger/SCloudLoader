@@ -11,6 +11,8 @@ from bot.routers.admin import admin_panel
 from bot.routers.admin import back_routers
 from bot.routers.admin.sub import admin_router as sub_admin
 from bot.routers.admin import mailing
+from bot.routers.admin import temporary_subscription
+
 from bot.routers.users import terms
 from bot.routers.users import buy_sub_stars
 
@@ -25,6 +27,7 @@ def register_all_routers(dp: Dispatcher):
     free_attempt.router.message.filter(F.chat.type == "private")
 
     dp.include_router(free_attempt.router)
+    dp.include_router(temporary_subscription.router)
     dp.include_router(start.router)
     dp.include_router(buy_sub_stars.router)
     dp.include_router(download_track.router)
