@@ -153,7 +153,7 @@ def admin_temporary_sub():
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="🔙 Назад", callback_data="admin_menu"
+                    text="🔙 Назад", callback_data="too_admin_menu"
                 )
             ]
         ]
