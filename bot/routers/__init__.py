@@ -26,9 +26,9 @@ def register_all_routers(dp: Dispatcher):
 
     free_attempt.router.message.filter(F.chat.type == "private")
 
+    dp.include_router(start.router)
     dp.include_router(free_attempt.router)
     dp.include_router(temporary_subscription.router)
-    dp.include_router(start.router)
     dp.include_router(buy_sub_stars.router)
     dp.include_router(download_track.router)
     dp.include_router(sub.router)
