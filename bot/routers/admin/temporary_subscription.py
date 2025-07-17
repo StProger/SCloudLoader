@@ -32,8 +32,8 @@ async def insert_days(message: types.Message, state: FSMContext):
             reply_markup=admin_temporary_sub()
         )
         return
-    user = User.get_or_none(user_id=user_id)
-    print(f"User: {user}")
+    user: User | None = User.get_or_none(user_id=user_id)
+    print(f"User: {user.user_id} {user.first_name}")
     if not user:
         await message.answer(
             text="Нет такого пользователя в базе данных.",
