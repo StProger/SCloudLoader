@@ -146,3 +146,15 @@ def admin_del_sub(sub_id: int):
 
     )
 
+
+def admin_temporary_sub():
+
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="🔙 Назад", callback_data="admin_menu"
+                )
+            ]
+        ]
+    )

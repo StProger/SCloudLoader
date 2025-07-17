@@ -26,7 +26,7 @@ async def main():
         os.mkdir("bot/service/sound_cloud/tracks")
     storage = RedisStorage.from_url(settings.fsm_redis_url)
     client = Client(
-        "client",
+        "my_account",
         no_updates=True,
     )
     await client.start()

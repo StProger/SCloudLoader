@@ -313,6 +313,12 @@ async def admin_panel_main(callback: CallbackQuery):
                 ],
                 [
                     InlineKeyboardButton(
+                        text="Выдать подписку на время",
+                        callback_data="temporary_subscription"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
                         text="🔐 Обяз. Подписка",
                         callback_data="sub"
                     )
