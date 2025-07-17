@@ -32,8 +32,7 @@ async def insert_days(message: types.Message, state: FSMContext):
             reply_markup=admin_temporary_sub()
         )
         return
-    user: User | None = User.get_or_none(user_id=user_id)
-    print(f"User: {user.user_id} {user.first_name}")
+    user: User | None = await User.get_or_none(user_id=user_id)
     if not user:
         await message.answer(
             text="Нет такого пользователя в базе данных.",
@@ -62,7 +61,7 @@ async def give_suv(message: types.Message, state: FSMContext):
         return
     state_data = await state.get_data()
     user_id = state_data["user_id"]
-    user: User | None = User.get_or_none(user_id=user_id)
+    user: User | None = await User.get_or_none(user_id=user_id)
 
     if user:
         user.subscription_to = (user.subscription_to + timedelta(days=days))
