@@ -18,6 +18,12 @@ def admin_menu_markup():
                 ],
                 [
                     InlineKeyboardButton(
+                        text="Выдать подписку на время",
+                        callback_data="temporary_subscription"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
                         text="🔐 Обяз. Подписка",
                         callback_data="sub"
                     ),
