@@ -56,7 +56,7 @@ class SoundCloud():
             print(list_files)
             if len(list_files) > 1:
 
-                shutil.make_archive(f"bot/service/sound_cloud/tracks/{user_id}/{user_id}", "zip", file_path)
+                shutil.make_archive(f"bot/service/sound_cloud/tracks/archive/{user_id}", "zip", file_path)
                 list_files = os.listdir(file_path)
                 print(list_files)
                 for file in list_files:
