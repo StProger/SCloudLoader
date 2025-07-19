@@ -4,9 +4,9 @@ import asyncio
 # from bot.settings import settings
 
 
-client = Client(
-        "my_account",
-    )
+# client = Client(
+#         "my_account",
+#     )
 
 async def main():
     # client = Client(

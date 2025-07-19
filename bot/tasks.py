@@ -28,7 +28,6 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
         track_name = os.listdir(file_path)[0]
         logging.info(f"Трек: {track_name}")
         with Client("my_account.session") as app:
-            app: Client
             if "zip" in track_name:
                 message: Message = app.send_document(chat_id=settings.CHANNEL_ID_MUSIC, document=file_path + "/" + track_name)
             else:

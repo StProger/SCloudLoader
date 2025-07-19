@@ -25,13 +25,13 @@ async def main():
     if not(os.path.exists("bot/service/sound_cloud/tracks")):
         os.mkdir("bot/service/sound_cloud/tracks")
     storage = RedisStorage.from_url(settings.fsm_redis_url)
-    client = Client(
-        "my_account",
-        no_updates=True,
-    )
-    await client.start()
+    # client = Client(
+    #     "my_account",
+    #     no_updates=True,
+    # )
+    # await client.start()
     dp = Dispatcher(storage=storage)
-    dp["client"] = client
+    # dp["client"] = client
 
     bot = Bot(settings.BOT_TOKEN, default=DefaultBotProperties(parse_mode="HTML", link_preview_is_disabled=True))
 
@@ -52,7 +52,7 @@ async def main():
         sys.exit(1)
     finally:
         await bot.session.close()
-        await client.stop()
+        # await client.stop()
 
 
 if __name__ == '__main__':
