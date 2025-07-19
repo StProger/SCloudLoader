@@ -60,7 +60,9 @@ class SoundCloud():
                 for file in list_files:
                     if "zip" not in file:
                         os.remove(file_path + "/" + file)
-
+                list_files = os.listdir(file_path)
+                print(list_files)
+            print('Выход')
             return True
         except Exception as ex:
             logging.error(ex)
