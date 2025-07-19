@@ -52,7 +52,7 @@ class SoundCloud():
             file_path = f'bot/service/sound_cloud/tracks/{user_id}'
             file_path_archive = f"bot/service/sound_cloud/tracks/archive/{user_id}/"
             if not os.path.exists(file_path_archive):
-                os.mkdir(file_path_archive)
+                os.makedirs(file_path_archive, exist_ok=True)
             cls.proces_download_track(file_path=file_path, url=track_url)
             list_files = os.listdir(file_path)
             print(list_files)
