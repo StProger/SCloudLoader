@@ -1,5 +1,4 @@
 from pyrogram import Client
-import asyncio
 
 # from bot.settings import settings
 
@@ -15,7 +14,7 @@ def main():
     #     api_id=settings.API_ID
     # )
     # await client.send_message(chat_id=-2679124021, text="Greetings from **Pyrogram**!")
-    with Client("my_account") as app:
+    with Client("../my_account") as app:
         app.send_message(-1002679124021, text="Greetings from **Pyrogram**!")
 
 
