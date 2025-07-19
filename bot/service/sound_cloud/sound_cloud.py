@@ -1,3 +1,5 @@
+import logging
+
 import yt_dlp
 from aiogram.fsm.context import FSMContext
 
@@ -41,55 +43,27 @@ class SoundCloud():
         #     print(f"Ошибка {ex[:40]}")
 
     @classmethod
-    async def download_track(cls,
-                             track_url: str,
-                             user_id: int,
-                             state: FSMContext | None = None,) -> bool | None | str:
+    def download_track(cls,
+                       track_url: str,
+                       user_id: int) -> bool | None | str:
         """ Скачивание трека """
         try:
 
-            # filename = f'{user_id}.mp3'
-            file_path = f'bot/service/sound_cloud/tracks/432'
+            file_path = f'bot/service/sound_cloud/tracks/{user_id}'
 
-            # process_download = Process(target=cls.proces_download_track, args=(filename, file_path, track_url))
             cls.proces_download_track(file_path=file_path, url=track_url)
-            # process_download.start()
-            # process_download.join(timeout=10)
             list_files = os.listdir(file_path)
             if len(list_files) > 1:
-                shutil.make_archive("bot/service/sound_cloud/tracks/432/432", "zip", file_path)
-            print(list_files)
 
-            # file_name_track = (list(filter(lambda file_: f"{user_id}.mp3" in file_, list_files)))[0]
-
-            # title = file_name_track.split('_', maxsplit=1)[0]
-
-            # try:
-            #     track: Track = await cls.api.resolve(track_url.replace("m.", "", 1))
-            # except KeyError:
-            #     return
-            #
-            # if track is None:
-            #     return
-
-            # await state.update_data(
-            #     title_track=title,
-            #     filename=file_name_track.replace(".mp3", ".wav")
-            # )
-
-            # with open(filename, 'wb+') as file:
-            #     await track.write_mp3_to(file)
-
-            # await cls.convert_mp3_to_wav(
-            #     user_id=user_id,
-            #     filename=file_name_track
-            # )
-            for file in list_files:
-                os.remove(file_path + "/" + file)
+                shutil.make_archive(f"bot/service/sound_cloud/tracks/{user_id}/{user_id}", "zip", file_path)
+                for file in list_files:
+                    if "zip" not in file:
+                        os.remove(file_path + "/" + file)
 
             return True
         except Exception as ex:
-            return
+            logging.error(ex)
+            return False
 
     @classmethod
     async def convert_mp3_to_wav(cls,
