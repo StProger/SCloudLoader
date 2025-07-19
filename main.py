@@ -24,6 +24,8 @@ async def main():
 
     if not(os.path.exists("bot/service/sound_cloud/tracks")):
         os.mkdir("bot/service/sound_cloud/tracks")
+    if not(os.path.exists("bot/service/sound_cloud/tracks/archive")):
+        os.mkdir("bot/service/sound_cloud/tracks/archive")
     storage = RedisStorage.from_url(settings.fsm_redis_url)
     # client = Client(
     #     "my_account",
