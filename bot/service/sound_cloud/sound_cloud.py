@@ -57,11 +57,12 @@ class SoundCloud():
             if len(list_files) > 1:
 
                 shutil.make_archive(f"bot/service/sound_cloud/tracks/{user_id}/{user_id}", "zip", file_path)
+                list_files = os.listdir(file_path)
+                print(list_files)
                 for file in list_files:
                     if "zip" not in file:
                         os.remove(file_path + "/" + file)
-                list_files = os.listdir(file_path)
-                print(list_files)
+
             print('Выход')
             return True
         except Exception as ex:
