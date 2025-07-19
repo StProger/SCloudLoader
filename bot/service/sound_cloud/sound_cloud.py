@@ -50,7 +50,7 @@ class SoundCloud():
         try:
 
             file_path = f'bot/service/sound_cloud/tracks/{user_id}'
-            file_path_archive = f"bot/service/sound_cloud/tracks/archive/{user_id}/{user_id}"
+            file_path_archive = f"bot/service/sound_cloud/tracks/archive/{user_id}/{user_id}.zip"
             if not os.path.exists(file_path_archive):
                 os.makedirs(file_path_archive, exist_ok=True)
             cls.proces_download_track(file_path=file_path, url=track_url)
@@ -62,8 +62,8 @@ class SoundCloud():
                 list_files_archive = os.listdir(file_path_archive)
                 print(list_files_archive)
                 for file in list_files:
-                    if "zip" not in file:
-                        os.remove(file_path + "/" + file)
+
+                    os.remove(file_path + "/" + file)
 
             print('Выход')
             return True
