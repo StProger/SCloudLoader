@@ -35,6 +35,7 @@ services:
       - ./.env
 
     command: sh -c "python3 main.py"
+
   celery:
     build: .
     container_name: scloud_celery_worker
