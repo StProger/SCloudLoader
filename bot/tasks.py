@@ -6,7 +6,7 @@ from pyrogram.types import Message
 
 from bot.service import SoundCloud
 from bot.settings import settings
-from celery_app import celery_app
+from bot.celery_app import celery_app
 import telebot
 
 BOT_TOKEN = settings.BOT_TOKEN
