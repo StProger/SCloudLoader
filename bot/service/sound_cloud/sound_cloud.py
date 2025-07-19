@@ -50,7 +50,7 @@ class SoundCloud():
         try:
 
             file_path = f'bot/service/sound_cloud/tracks/{user_id}'
-            file_path_archive = f"bot/service/sound_cloud/tracks/archive/{user_id}/{user_id}.zip"
+            file_path_archive = f"bot/service/sound_cloud/tracks/archive/{user_id}/{user_id}"
             if not os.path.exists(file_path_archive):
                 os.makedirs(file_path_archive, exist_ok=True)
             cls.proces_download_track(file_path=file_path, url=track_url)
