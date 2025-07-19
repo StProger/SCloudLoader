@@ -18,20 +18,20 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
         track_url=track_url,
         user_id=user_id,
     )
-    logging.info(f'Downloaded: {downloaded_track}')
+    print(f'Downloaded: {downloaded_track}')
     try:
         bot.delete_message(chat_id=user_id, message_id=clock_message_id)
     except:
         ...
     if downloaded_track:
-        logging.info(f"Send track...")
+        print(f"Send track...")
 
         file_path = f'bot/service/sound_cloud/tracks/{user_id}'
         track_name = os.listdir(file_path)[0]
-        logging.info(f"Трек: {track_name}")
-        logging.info('Connecting to client...')
+        print(f"Трек: {track_name}")
+        print('Connecting to client...')
         with Client("my_account.session") as app:
-            logging.info("Connected to client complete...")
+            print("Connected to client complete...")
             if "zip" in track_name:
                 message: Message = app.send_document(chat_id=settings.CHANNEL_ID_MUSIC, document=file_path + "/" + track_name)
             else:

@@ -53,6 +53,7 @@ class SoundCloud():
 
             cls.proces_download_track(file_path=file_path, url=track_url)
             list_files = os.listdir(file_path)
+            print(list_files)
             if len(list_files) > 1:
 
                 shutil.make_archive(f"bot/service/sound_cloud/tracks/{user_id}/{user_id}", "zip", file_path)
