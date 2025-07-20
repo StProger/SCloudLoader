@@ -64,6 +64,8 @@ class Settings(BaseSettings):
     # Обработка персональных данных
     personal_data: str = "https://docs.google.com/document/d/1meffmKDtaO9G5wZ_G6-O7xt8V7WnukFMkRWHtTsmJlI/edit?usp=sharing"
 
+    PYRO_SESSION_STRING: str = os.getenv("PYRO_SESSION_STRING")
+
     # Цены подписки
     PRICES: dict = {
         "crypto": {

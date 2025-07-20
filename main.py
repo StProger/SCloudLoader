@@ -41,7 +41,7 @@ async def main():
     register_all_routers(dp)
 
     await set_bot_commands(bot)
-    # await logging.setup()
+    await logging.setup()
 
     BOT_SCHEDULER.add_job(notification_sub, trigger="interval", hours=24, args=(bot,))
     BOT_SCHEDULER.start()
