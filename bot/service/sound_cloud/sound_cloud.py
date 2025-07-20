@@ -50,7 +50,7 @@ class SoundCloud():
         try:
 
             file_path = f'bot/service/sound_cloud/tracks/{user_id}'
-            file_path_archive = f"bot/service/sound_cloud/tracks/archive/{user_id}"
+            file_path_archive = f"bot/service/sound_cloud/tracks/archive"
             archive_file_path = os.path.join(file_path_archive, str(user_id))  # путь без расширения
 
             # Создать архивную папку, если не существует
