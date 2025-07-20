@@ -27,7 +27,7 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
         print(f"Send track...")
 
         file_path = f'bot/service/sound_cloud/tracks/{user_id}'
-        archive_track_path = f'bot/service/sound_cloud/tracks/archive/{user_id}'
+        archive_track_path = f'bot/service/sound_cloud/tracks/archive'
         archive_file_path = os.path.join(archive_track_path, str(user_id))
         track_name = os.listdir(file_path)
         if not track_name:
