@@ -41,11 +41,22 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
         print('Connecting to client...')
         with Client("my_account", in_memory=True, session_string=settings.PYRO_SESSION_STRING) as app:
             print("Connected to client complete...")
+
             if "zip" in track_name:
-                message: Message = app.send_document(chat_id=settings.CHANNEL_ID_MUSIC, document=os.path.join(archive_file_path, track_name))
+                document = os.path.join(archive_file_path, track_name)
+                message: Message = app.send_document(chat_id=settings.CHANNEL_ID_MUSIC, document=document)
+                try:
+                    os.remove(document)
+                except Exception as ex:
+                    logging.error(ex)
             else:
-                message: Message = app.send_audio(chat_id=settings.CHANNEL_ID_MUSIC, audio=os.path.join(file_path, track_name))
-            os.remove(file_path + "/" + track_name)
+                audio = os.path.join(file_path, track_name)
+                message: Message = app.send_audio(chat_id=settings.CHANNEL_ID_MUSIC, audio=audio)
+                try:
+                    os.remove(audio)
+                except Exception as ex:
+                    logging.error(ex)
+
             try:
                 bot.copy_message(chat_id=user_id, from_chat_id=settings.CHANNEL_ID_MUSIC, message_id=message.id)
             except Exception as e:
