@@ -77,7 +77,7 @@ async def give_suv(message: types.Message, state: FSMContext):
         try:
             await message.bot.send_message(
                 chat_id=user_id,
-                text=f"Вам выдана подписка на {days} дней.\n Подписка действует до <code>{user.expire_sub()}</code>"
+                text=f"Вам выдана подписка на {days} дней.\n Подписка действует до <code>{user.date_expire_sub()}</code>"
             )
         except Exception as ex:
             logging.error(ex)
