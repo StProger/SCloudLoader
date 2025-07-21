@@ -23,5 +23,5 @@ class InterceptHandler(logging.Handler):
 
 
 async def setup():
-    logging.basicConfig(handlers=[InterceptHandler()], level=logging.DEBUG)
+    logging.basicConfig(handlers=[InterceptHandler()], level=logging.INFO)
     logger.add(settings.PATH_LOGS, rotation="5 MB")
