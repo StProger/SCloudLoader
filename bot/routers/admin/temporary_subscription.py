@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 
 from aiogram import Router, F, types
@@ -6,6 +7,7 @@ from aiogram.fsm.context import FSMContext
 
 from bot.database.models.user import User
 from bot.keyboards.inline.admin import admin_temporary_sub
+import datetime
 
 router = Router()
 
@@ -68,9 +70,17 @@ async def give_suv(message: types.Message, state: FSMContext):
         await user.save()
         await state.clear()
         await message.answer(
-            text=f"Подписка пользователю с ID {user_id} выдана на {days} дней.",
+            text=f"Подписка пользователю с ID {user_id} выдана на {days} дней.\n"
+                 f"Уведомление отправлено.",
             reply_markup=admin_temporary_sub()
         )
+        try:
+            await message.bot.send_message(
+                chat_id=user_id,
+                text=f"Вам выдана подписка на {days} дней.\n Подписка действует до <code>{user.expire_sub()}</code>"
+            )
+        except Exception as ex:
+            logging.error(ex)
     else:
         await message.answer(text="Нет такого пользователя с базе данных.",
                              reply_markup=admin_temporary_sub())

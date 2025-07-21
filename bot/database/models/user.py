@@ -52,6 +52,10 @@ class User(Model):
 
         return (self.subscription_to - datetime.now(tz=pytz.timezone(settings.BOT_TIMEZONE))).days
 
+    def date_expire_sub(self):
+
+        return self.subscription_to.strftime("%Y-%m-%d")
+
     async def get_count_ref(self):
 
         return await User.filter(Q(id_referral=self.user_id)).count()
