@@ -41,7 +41,7 @@ services:
     container_name: scloud_celery_worker
     restart: always
     env_file:
-      - .env
+      - ./.env
     depends_on:
       - redis
     command: celery -A bot.celery_app worker --concurrency=2 --loglevel=info
@@ -49,14 +49,10 @@ services:
   flower:
     build: .
     env_file:
-      - .env
+      - ./.env
     depends_on:
       - redis
-    command: >
-      sh -c "celery -A bot.celery_app flower
-      --port=5555
-      --broker=redis://redis:6379/3
-      --basic_auth=${FLOWER_BASIC_AUTH}"
+    command: celery -A bot.celery_app flower --port=5555 --broker=redis://redis:6379/3 --basic_auth=${FLOWER_BASIC_AUTH}
     ports:
       - "5555:5555"
 
