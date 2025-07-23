@@ -73,7 +73,7 @@ async def download_music(
             message.text,
             downloaded_msg.message_id
         )
-        user.free_attempts = user.free_attempts - 1
+        user.free_attempts = user.free_attempts + 1
         await user.save()
 
     await state.clear()
