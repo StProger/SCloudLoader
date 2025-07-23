@@ -3,7 +3,7 @@ from celery import Celery
 celery_app = Celery(
     "telegram_tasks",
     broker="redis://redis:6379/3",
-    backend="redis://redis:6379/4",
+    backend="redis://redis:6379/3",
     include=["bot.tasks"]
 )
 
