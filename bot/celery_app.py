@@ -14,4 +14,5 @@ celery_app.conf.update(
     worker_prefetch_multiplier=1,  # по одной задаче на воркер
     task_time_limit=300,         # максимум 5 минут на задачу
     task_soft_time_limit=240,    # мягкий лимит — предупредить
+    broker_connection_retry_on_startup=True,
 )
