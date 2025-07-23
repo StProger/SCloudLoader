@@ -7,7 +7,7 @@ from pyrogram import Client
 
 from bot.database.models.user import User
 from bot.service.misc.misc_messages import download_track
-from bot.service.redis_serv.user import get_msg_to_delete
+from bot.service.redis_serv.user import get_msg_to_delete, set_msg_to_delete
 from bot.service.sound_cloud.sound_cloud import SoundCloud
 from bot.keyboards.inline.user import main_menu_key
 
@@ -17,6 +17,31 @@ from bot.settings import settings
 from bot.tasks import download_track_and_send
 
 router = Router()
+
+
+@router.message(F.text.contains("https"))
+async def download_music(
+        message: types.Message,
+        state: FSMContext,
+        user: User,
+):
+
+    if not await user.is_subscribed():
+        await message.answer("У вас нет подписки❌")
+        return
+
+    downloaded_msg = await message.answer(
+        text="Скачивание трека...⏳"
+    )
+
+    # Тут логика скачивания музыки и отправка
+    download_track_and_send.delay(
+        message.from_user.id,
+        message.text,
+        downloaded_msg.message_id
+    )
+
+    await state.clear()
 
 
 @router.callback_query(
