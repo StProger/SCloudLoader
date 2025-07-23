@@ -48,6 +48,7 @@ services:
 
   flower:
     build: .
+    container_name: scloud_flower
     env_file:
       - ./.env
     depends_on:
