@@ -19,10 +19,7 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
         user_id=user_id,
     )
     print(f'Downloaded: {downloaded_track}')
-    try:
-        bot.delete_message(chat_id=user_id, message_id=clock_message_id)
-    except:
-        ...
+
     if downloaded_track:
         print(f"Send track...")
 
@@ -58,6 +55,10 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
                     logging.error(ex)
 
             try:
+                try:
+                    bot.delete_message(chat_id=user_id, message_id=clock_message_id)
+                except:
+                    ...
                 bot.copy_message(chat_id=user_id, from_chat_id=settings.CHANNEL_ID_MUSIC, message_id=message.id)
             except Exception as e:
                 print(f"Ошибка при копировании сообщения: {e}")
