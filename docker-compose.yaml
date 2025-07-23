@@ -44,7 +44,7 @@ services:
       - .env
     depends_on:
       - redis
-    command: celery -A bot.celery_app worker --loglevel=info
+    command: celery -A bot.celery_app worker --concurrency=2 --loglevel=info
 
 volumes:
   redis-data:

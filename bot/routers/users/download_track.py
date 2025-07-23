@@ -57,6 +57,8 @@ async def download_track_(
     except:
         pass
 
+    await state.clear()
+
     downloaded_msg = await message.answer(
         text="Скачивание трека...⏳"
     )
@@ -66,4 +68,3 @@ async def download_track_(
         downloaded_msg.message_id
     )
 
-    await state.clear()
