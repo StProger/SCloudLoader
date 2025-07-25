@@ -35,7 +35,7 @@ async def main_menu(message: Message):
 async def main_menu_admin(message: Message):
 
     await message.answer(
-        text="Главное меню",
+        text=menu_text,
         reply_markup=main_inline_admin()
     )
 
