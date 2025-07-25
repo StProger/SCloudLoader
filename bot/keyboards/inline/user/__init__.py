@@ -36,6 +36,11 @@ def main_inline() -> InlineKeyboardMarkup:
                 InlineKeyboardButton(
                     text="Тех. поддержка", url="https://t.me/babodoy"
                 )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Как получить ссылку на трек", url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                )
             ]
         ]
     )
@@ -64,6 +69,11 @@ def main_inline_admin():
                 ),
                 InlineKeyboardButton(
                     text="Тех. поддержка", url="https://t.me/vzavyazkebot"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Как получить ссылку на трек", url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
                 )
             ]
         ]
