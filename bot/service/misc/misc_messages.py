@@ -21,11 +21,13 @@ from bot.database.models.user import User
 
 import asyncio
 
+menu_text = """Вы в главном меню.
 
+Отправьте ссылку на трек или воспользуйтесь кнопкой "Скачать музыку🎧", чтобы скачать трек."""
 async def main_menu(message: Message):
 
     await message.answer(
-        text="Главное меню",
+        text=menu_text,
         reply_markup=main_inline()
     )
 
@@ -42,14 +44,14 @@ async def main_menu_admin(message: Message):
 async def callback_main_menu(callback: CallbackQuery):
 
     await callback.message.edit_text(
-        text="Главное меню",
+        text=menu_text,
         reply_markup=main_inline()
     )
 
 async def callback_main_admin_menu(callback: CallbackQuery):
 
     await callback.message.edit_text(
-        text="Главное меню",
+        text=menu_text,
         reply_markup=main_inline_admin()
     )
 
