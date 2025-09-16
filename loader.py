@@ -6,6 +6,8 @@ from pyrogram import Client
 # client = Client(
 #         "my_account",
 #     )
+API_HASH="f3564dd1d748e2b7724b8036d9b5f78b"
+API_ID=13840126
 
 def main():
     # client = Client(
@@ -15,9 +17,8 @@ def main():
     # )
     # await client.send_message(chat_id=-2679124021, text="Greetings from **Pyrogram**!")
     with Client(
-        "my_account",
-        in_memory=True,
-                session_string="AgGHP48AaYM5J0GZadPvJ2c8JKFHjceNnHZqwi1NUD-G9WFwzPBjWX3cMdWT39T4sqTyBgdfexLoT6h8ly3zTL_DCuJioWkLfz-l3_79RlnaPOJGShHCoOm8uEAYgRDm8vp41gplbVy9ajgwi7-TsJS7jJGLIGA_SszPEABLCcBcuSylOO2MRcXQ1YBxj2NRvM2MhxRGbxydwKGD2DJcFgABQ2Dde6cJSyJVGFQnAYpYeHHA0GGmknUlrPCZLKyWdhtPmhwhpNSNKuisMDDFIOQVb6aWyHXdRiqjn99B04dCIUCEfYbpZ_hmFinoZQysDiWcWuGdW6uiwRtPD69hNm3LuXaFIQAAAAHZOFITAA") as app:
+        "client",
+        api_hash=API_HASH, api_id=API_ID) as app:
         app.send_message(-1002679124021, text="Greetings from **Pyrogram**!")
 
 
