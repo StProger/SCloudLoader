@@ -1,7 +1,7 @@
 from .di import ExistsUserMiddleware
 from .subscription import SubMiddleware
 from .throttling import ThrottlingMiddleware
-from .di_client import DIClient
+# from .di_client import DIClient
 
 from aiogram import Dispatcher
 
