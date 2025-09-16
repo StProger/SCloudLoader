@@ -36,7 +36,7 @@ def download_track_and_send(user_id: int, track_url: str, clock_message_id):
             track_name = track_name[0]
         print(f"Трек: {track_name}")
         print('Connecting to client...')
-        with Client("my_account", in_memory=True, session_string=settings.PYRO_SESSION_STRING) as app:
+        with Client("client", in_memory=True, session_string=settings.PYRO_SESSION_STRING) as app:
             print("Connected to client complete...")
 
             if "zip" in track_name:
