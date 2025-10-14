@@ -97,7 +97,7 @@ async def free_attempts(
                                         [
                                             types.InlineKeyboardButton(
                                                 text="Как получить ссылку",
-                                                url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                                                url="https://teletype.in/@vzavyazkebot/Oykudavzyatssilku"
                                             )
                                         ]
                                     ]
@@ -146,7 +146,7 @@ async def subbed(callback: types.CallbackQuery,
                                             [
                                                 types.InlineKeyboardButton(
                                                     text="Как получить ссылку",
-                                                    url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                                                    url="https://teletype.in/@vzavyazkebot/Oykudavzyatssilku"
                                                 )
                                             ]
                                         ]

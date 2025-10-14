@@ -34,12 +34,17 @@ def main_inline() -> InlineKeyboardMarkup:
                     text="Реферальная система", callback_data="ref_system"
                 ),
                 InlineKeyboardButton(
-                    text="Тех. поддержка", url="https://t.me/babodoy"
+                    text="Тех. поддержка", url="https://t.me/vzavyazkebot"
                 )
             ],
             [
                 InlineKeyboardButton(
-                    text="Как получить ссылку на трек", url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                    text="Как получить ссылку на трек", url="https://teletype.in/@vzavyazkebot/Oykudavzyatssilku"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Как купить звёзды", url="https://teletype.in/@vzavyazkebot/Zvezditelegramkupi"
                 )
             ]
         ]
@@ -73,7 +78,7 @@ def main_inline_admin():
             ],
             [
                 InlineKeyboardButton(
-                    text="Как получить ссылку на трек", url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                    text="Как получить ссылку на трек", url="https://teletype.in/@vzavyazkebot/Oykudavzyatssilku"
                 )
             ]
         ]
@@ -115,7 +120,7 @@ def download_track_inline():
             ],
             [
                 InlineKeyboardButton(
-                    text="Как получить ссылку", url="https://telegra.ph/Poluchenie-ssylki-na-trek-SoundCloud-04-15"
+                    text="Как получить ссылку", url="https://teletype.in/@vzavyazkebot/Oykudavzyatssilku"
                 )
             ]
         ]

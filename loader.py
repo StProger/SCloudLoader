@@ -19,6 +19,8 @@ def main():
     with Client(
         "client",
         api_hash=API_HASH, api_id=API_ID) as app:
+        app: Client
+        # app.send_message("kicode", "hi")
         app.send_message(-1002679124021, text="Greetings from **Pyrogram**!")
 
 
