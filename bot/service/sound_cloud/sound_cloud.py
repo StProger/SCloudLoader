@@ -85,7 +85,7 @@ class SoundCloud():
             print('Выход')
             return True
         except Exception as ex:
-            logger.error(ex, extra={"flag": "tg"})
+            logger.error(ex, extra={"flag": "tg"}, exc_info=True)
             return False
 
     @classmethod
