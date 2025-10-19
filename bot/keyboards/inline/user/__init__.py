@@ -80,6 +80,11 @@ def main_inline_admin():
                 InlineKeyboardButton(
                     text="Как получить ссылку на трек", url="https://teletype.in/@vzavyazkebot/Oykudavzyatssilku"
                 )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Как купить звёзды", url="https://teletype.in/@vzavyazkebot/Zvezditelegramkupi"
+                )
             ]
         ]
     )
