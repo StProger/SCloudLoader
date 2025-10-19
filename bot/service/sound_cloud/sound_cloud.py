@@ -15,6 +15,18 @@ from sclib.sync import UnsupportedFormatError
 
 from multiprocessing import Process
 
+from bot.telegram_logger.formatter import FORMATTER
+from bot.telegram_logger.handler import LogMessageDispatcher
+
+tg_handler = LogMessageDispatcher(
+    token=os.getenv('BOT_TOKEN'),
+    mode=os.getenv('MODE'),
+)
+formatter = FORMATTER
+
+logger = logging.getLogger(__name__)
+tg_handler.setFormatter(formatter)
+logger.addHandler(tg_handler)
 
 class SoundCloud():
 
@@ -73,7 +85,7 @@ class SoundCloud():
             print('Выход')
             return True
         except Exception as ex:
-            logging.error(ex)
+            logger.error(ex, extra={"flag": "tg"})
             return False
 
     @classmethod
